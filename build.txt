@@ -1,0 +1,3 @@
+displayName = Permanent Buff Viewer
+author = LogicalContradiction
+version = 0.1
