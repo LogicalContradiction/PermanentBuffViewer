@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -25,11 +26,11 @@ namespace PermanentBuffViewer
                 case ItemID.LifeCrystal: return this.Player.ConsumedLifeCrystals;
                 case ItemID.LifeFruit: return this.Player.ConsumedLifeFruit;
                 case ItemID.ManaCrystal: return this.Player.ConsumedManaCrystals;
-                default: 
-                    throw new ArgumentException(
-                        "GetNumOfPermanentItemUsed() in BuffViewerPlayer was called with an invalid " +
+                default:
+                    Mod.Logger.Error("GetNumOfPermanentItemUsed() in BuffViewerPlayer was called with an invalid " +
                         $"ItemID.\nValid IDs:\nLifeCrystal: {ItemID.LifeCrystal}\nLifeFruit: {ItemID.LifeFruit}\n" +
-                        $"ManaCrystal: {ItemID.ManaCrystal}\nItemID called: {itemID}");
+                        $"ManaCrystal: {ItemID.ManaCrystal}\nItemID called: {new Item(itemID).Name} ({itemID})");
+                    return -1;
             }
         }
     }
