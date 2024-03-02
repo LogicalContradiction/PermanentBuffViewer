@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermanentBuffViewer", "PermanentBuffViewer.csproj", "{B2ACAC78-8609-4E41-BBEE-6F8BB6E5BC56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2ACAC78-8609-4E41-BBEE-6F8BB6E5BC56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2ACAC78-8609-4E41-BBEE-6F8BB6E5BC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2ACAC78-8609-4E41-BBEE-6F8BB6E5BC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2ACAC78-8609-4E41-BBEE-6F8BB6E5BC56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E809479-DD8D-4E5E-9B79-D41452A302D7}
+	EndGlobalSection
+EndGlobal
