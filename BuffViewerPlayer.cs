@@ -11,6 +11,13 @@ namespace PermanentBuffViewer
     public class BuffViewerPlayer : ModPlayer
     {
 
+        /// <summary>
+        /// Gets the number of permanent buff items used based on an ItemID.
+        /// Valid ItemIDs: Life Crystal (LifeCrystal), Life Fruit (LifeFruit), Mana Crystal (ManaCrystal)
+        /// </summary>
+        /// <param name="itemID">The ID of the item to get how many have been used. Must be one of the valid IDs.</param>
+        /// <returns>The number of permanent buff items of the given type have been used if the ID was valid.</returns>
+        /// <exception cref="ArgumentException">The ID given wasn't a valid ID.</exception>
         public int GetNumOfPermanentItemUsed(int itemID)
         {
             switch(itemID)
