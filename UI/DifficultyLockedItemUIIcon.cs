@@ -85,6 +85,7 @@ namespace PermanentBuffViewer.UI
                         "CreateHoverText() for difficulty locked UI Icon was called in a world where " +
                         "the icon should not be drawn. The following item should not have been added to the " +
                         $"rendered UI: {item.Name}");
+                    return itemNotUsedHoverText.Format();
                 }
                 // Item has been used but is not available in current world.
                 return itemNotAvailableInCurrentDifficulty.Format();
