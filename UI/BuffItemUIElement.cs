@@ -71,6 +71,15 @@ namespace PermanentBuffViewer.UI
         }
 
         /// <summary>
+        /// Checks if the current element is in the UI.
+        /// </summary>
+        /// <returns>True if this element is in the UI, False if it is not.</returns>
+        public bool InUI()
+        {
+            return Parent != null;
+        }
+
+        /// <summary>
         /// Determines if this sprite should be added to rendering.
         /// </summary>
         /// <returns>True if this sprite should be added to the renderlist. False if not.</returns>
