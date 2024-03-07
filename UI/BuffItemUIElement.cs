@@ -25,6 +25,8 @@ namespace PermanentBuffViewer.UI
         internal LocalizedText amountIncreaseBy;
         internal LocalizedText statIncreased;
 
+        internal static ItemIconSortOrder sortOrder;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -46,6 +48,7 @@ namespace PermanentBuffViewer.UI
             statIncreased = Language.GetOrRegister(statIncrasedKey);
             base.Width.Set(32f, 0f);
             base.Height.Set(32f, 0f);
+            if (sortOrder == null) sortOrder = new ItemIconSortOrder();
         }
 
         /// <summary>
@@ -95,6 +98,12 @@ namespace PermanentBuffViewer.UI
             {
                 Main.instance.MouseText(CreateHoverText());
             }
+        }
+
+        public override int CompareTo(object obj)
+        {
+            if (obj is BuffItemUIElement) return sortOrder.Compare(this, (BuffItemUIElement)obj);
+            return base.CompareTo(obj);
         }
     }
 }
