@@ -76,9 +76,9 @@ namespace PermanentBuffViewer
                     continue;
                 }
                 if (columnCount == 0) element.Left = StyleDimension.FromPixels(0);
-                else element.Left = StyleDimension.FromPixels(prevElement.Left.Pixels + 32);
+                else element.Left = StyleDimension.FromPixels(prevElement.Left.Pixels + 40);
                 if (rowCount == 0) element.Top = StyleDimension.FromPixels(0);
-                else element.Top = StyleDimension.FromPixels(rowCount * 32);
+                else element.Top = StyleDimension.FromPixels(rowCount * 40);
 
                 panel.Append(element);
                 prevElement = element;
