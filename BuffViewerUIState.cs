@@ -58,6 +58,10 @@ namespace PermanentBuffViewer
             panel.HAlign = 0.5f;
             panel.VAlign = 0.5f;
 
+            UIText headerText = new UIText("Item Sprite Test");
+            headerText.HAlign = 0.5f;
+            panel.Append(headerText);
+
             Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
 
             // place each element in the panel
@@ -71,14 +75,16 @@ namespace PermanentBuffViewer
                 {
                     // place first element
                     element.Left = StyleDimension.FromPixels(0);
-                    element.Top= StyleDimension.FromPixels(0);
+                    element.Top = StyleDimension.FromPixels(30);
+                    columnCount++;
+                    panel.Append(element);
                     prevElement = element;
                     continue;
                 }
                 if (columnCount == 0) element.Left = StyleDimension.FromPixels(0);
                 else element.Left = StyleDimension.FromPixels(prevElement.Left.Pixels + 40);
-                if (rowCount == 0) element.Top = StyleDimension.FromPixels(0);
-                else element.Top = StyleDimension.FromPixels(rowCount * 40);
+                if (rowCount == 0) element.Top = StyleDimension.FromPixels(30);
+                else element.Top = StyleDimension.FromPixels((rowCount * 40) + 30);
 
                 panel.Append(element);
                 prevElement = element;
