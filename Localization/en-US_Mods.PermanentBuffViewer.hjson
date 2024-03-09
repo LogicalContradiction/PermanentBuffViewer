@@ -1,1 +1,56 @@
-# This file will automatically update with entries for new content after a build and reload
+Conditions: {
+	UsedLifeCrystal: Mods.PermanentBuffViewer.Conditions.UsedLifeCrystal
+	UsedLifeFruit: Mods.PermanentBuffViewer.Conditions.UsedLifeFruit
+	UsedVitalCrystal: Mods.PermanentBuffViewer.Conditions.UsedVitalCrystal
+	UsedManaCrystal: Mods.PermanentBuffViewer.Conditions.UsedManaCrystal
+	UsedArcaneCrystal: Mods.PermanentBuffViewer.Conditions.UsedArcaneCrystal
+	UsedGummyWorm: Mods.PermanentBuffViewer.Conditions.UsedGummyWorm
+	UsedAmbrosia: Mods.PermanentBuffViewer.Conditions.UsedAmbrosia
+	UsedGalaxyPearl: Mods.PermanentBuffViewer.Conditions.UsedGalaxyPearl
+	UsedAegisFruit: Mods.PermanentBuffViewer.Conditions.UsedAegisFruit
+	UsedArtisanLoaf: Mods.PermanentBuffViewer.Conditions.UsedArtisanLoaf
+	UsedDemonHeart: Mods.PermanentBuffViewer.Conditions.UsedDemonHeart
+	UsedCombatBook: Mods.PermanentBuffViewer.Conditions.UsedCombatBook
+	UsedCombatBookVolumeTwo: Mods.PermanentBuffViewer.Conditions.UsedCombatBookVolumeTwo
+	UsedPeddlersSatchel: Mods.PermanentBuffViewer.Conditions.UsedPeddlersSatchel
+}
+
+Sprite: {
+	HoverText: {
+		Item: {
+			MultiUsed: Mods.PermanentBuffViewer.Sprite.HoverText.Item.MultiUsed
+			NotUsed: Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed
+			SingleUsed: Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed
+			NotAvailableInDifficulty: Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotAvailableInDifficulty
+		}
+
+		Numbers: {
+			Twenty: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Twenty
+			Five: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Five
+			TwentyPercent: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.TwentyPercent
+			FivePercent: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FivePercent
+			Three: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Three
+			ThreeHundredths: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.ThreeHundredths
+			Four: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Four
+			FourTiles: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FourTiles
+			One: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.One
+		}
+
+		Stats: {
+			MaxLife: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxLife
+			HealthRegenTime: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.HealthRegenTime
+			MaxMana: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxMana
+			ManaRegenDelay: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.ManaRegenDelay
+			FishingPower: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.FishingPower
+			MineAndWallPlaceSpeed: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MineAndWallPlaceSpeed
+			Luck: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.Luck
+			Defense: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.Defense
+			CraftStationAcessRange: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.CraftStationAcessRange
+			AccessorySlot: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.AccessorySlot
+			MinecartStats: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MinecartStats
+			NumTravelingMerchantItems: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.NumTravelingMerchantItems
+		}
+	}
+}
+
+DefaultText: Mods.PermanentBuffViewer.DefaultText
