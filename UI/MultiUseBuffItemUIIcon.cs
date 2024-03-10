@@ -22,12 +22,12 @@ namespace PermanentBuffViewer.UI
         /// <param name="maxNumCanUse">The maximum number of this item a single player can use.</param>
         /// <param name="itemUsedHoverTextKey">Localization key for the text displayed when an item has been used.</param>
         /// <param name="itemNotUsedHoverTextKey">Localization key for the text displayed when an item has not yet been used.</param>
-        /// <param name="amountIncreaseByKey">Localization key describing the amount the stat is increased by.</param>
-        /// <param name="statIncrasedKey">Localization key describing the player stat that is increased.</param>
+        /// <param name="howToObtainKey">Localization key describing how to obtain this item.</param>
+        /// <param name="statModifiedKey">Localization key describing the stat that is modified.</param>
         public MultiUseBuffItemUIIcon(Item item, Condition usedItem, int maxNumCanUse, string itemUsedHoverTextKey, 
-            string itemNotUsedHoverTextKey, string amountIncreaseByKey, string statIncrasedKey) : 
-            base(item, usedItem, itemUsedHoverTextKey, itemNotUsedHoverTextKey, amountIncreaseByKey, 
-                statIncrasedKey)
+            string itemNotUsedHoverTextKey, string howToObtainKey, string statModifiedKey) : 
+            base(item, usedItem, itemUsedHoverTextKey, itemNotUsedHoverTextKey, howToObtainKey, 
+                statModifiedKey)
         {
             this.maxNumCanUse = maxNumCanUse;
         }
@@ -35,9 +35,7 @@ namespace PermanentBuffViewer.UI
         public override string CreateHoverText()
         {
             return usedItem.IsMet() ?
-                itemUsedHoverText.Format(item.Name, 
-                Main.LocalPlayer.GetModPlayer<BuffViewerPlayer>().GetNumOfPermanentItemUsed(item.type),
-                maxNumCanUse, amountIncreaseBy.Value, statIncreased.Value) : 
+                itemUsedHoverText.Format() : 
                 itemNotUsedHoverText.Format();
         }
     }

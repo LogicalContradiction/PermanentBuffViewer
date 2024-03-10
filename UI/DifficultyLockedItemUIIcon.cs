@@ -28,15 +28,15 @@ namespace PermanentBuffViewer.UI
         /// <param name="availableDifficulties">The condition representing the difficulties this item is available in.</param>
         /// <param name="itemUsedHoverTextKey">Localization key for the text displayed when an item has been used.</param>
         /// <param name="itemNotUsedHoverTextKey">Localization key for the text displayed when an item has not yet been used.</param>
-        /// <param name="amountIncreaseByKey">Localization key describing the amount the stat is increased by.</param>
-        /// <param name="statIncrasedKey">Localization key describing the player stat that is increased.</param>
+        /// <param name="howToObtainKey">Localization key describing how to obtain this item.</param>
+        /// <param name="statModifiedKey">Localization key describing the stat that is modified.</param>
         /// <param name="itemNotAvailableInCurrentDifficulty">Localization key describing the item not being available in the current world difficulty.</param>
         public DifficultyLockedItemUIIcon(Item item, Condition usedItem, 
             Condition availableDifficulties, string itemUsedHoverTextKey, 
-            string itemNotUsedHoverTextKey, string amountIncreaseByKey, 
-            string statIncrasedKey, string itemNotAvailableInCurrentDifficulty) : 
+            string itemNotUsedHoverTextKey, string howToObtainKey, 
+            string statModifiedKey, string itemNotAvailableInCurrentDifficulty) : 
             base(item, usedItem, itemUsedHoverTextKey, itemNotUsedHoverTextKey, 
-                amountIncreaseByKey, statIncrasedKey)
+                howToObtainKey, statModifiedKey)
         {
             this.minDifficultyAvailable = availableDifficulties;
             this.itemNotAvailableInCurrentDifficulty = 

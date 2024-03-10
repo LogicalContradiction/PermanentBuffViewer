@@ -105,134 +105,134 @@ namespace PermanentBuffViewer
 
             MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
                 item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Twenty",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxLife");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
             elements.Add("lifeCrystal", lifeCrystal);
 
             MultiUseBuffItemUIIcon lifeFruit = new MultiUseBuffItemUIIcon(
                 item: new Item(ItemID.LifeFruit), usedItem: BuffViewerCondition.UsedLifeFruit, maxNumCanUse: 20,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Five",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxLife");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeFruit",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeFruit");
             elements.Add("lifeFruit", lifeFruit);
 
-            BuffItemUIIcon vitalCrystal = new BuffItemUIIcon(
-                item: new Item(ItemID.AegisCrystal), usedItem: BuffViewerCondition.UsedVitalCrystal,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.TwentyPercent",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.HealthRegenTime");
-            elements.Add("vitalCrystal", vitalCrystal);
+            BuffItemUIIcon aegisCrystal = new BuffItemUIIcon(
+                item: new Item(ItemID.AegisCrystal), usedItem: BuffViewerCondition.UsedAegisCrystal,
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.AegisCrystal",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.AegisCrystal");
+            elements.Add("aegisCrystal", aegisCrystal);
 
             MultiUseBuffItemUIIcon manaCrystal = new MultiUseBuffItemUIIcon(
                 item: new Item(ItemID.ManaCrystal), usedItem: BuffViewerCondition.UsedManaCrystal, maxNumCanUse: 9,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Twenty",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxMana");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ManaCrystal",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ManaCrystal");
             elements.Add("manaCrystal", manaCrystal);
 
-            BuffItemUIIcon arcaneCrystal = new BuffItemUIIcon( //decrease mana regen delay by 5%
+            BuffItemUIIcon arcaneCrystal = new BuffItemUIIcon( 
                 item: new Item(ItemID.ArcaneCrystal), usedItem: BuffViewerCondition.UsedArcaneCrystal,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FivePercent",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.ManaRegenDelay");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ArcaneCrystal",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ArcaneCrystal");
             elements.Add("arcaneCrystal", arcaneCrystal);
 
             BuffItemUIIcon gummyWorm = new BuffItemUIIcon( 
                 item: new Item(ItemID.GummyWorm), usedItem: BuffViewerCondition.UsedGummyWorm,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Three",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.FishingPower");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.GummyWorm",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.GummyWorm");
             elements.Add("gummyWorm", gummyWorm);
 
             BuffItemUIIcon ambrosia = new BuffItemUIIcon(
                 item: new Item(ItemID.Ambrosia), usedItem: BuffViewerCondition.UsedAmbrosia,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FivePercent",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MineAndWallPlaceSpeed");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.Ambrosia",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.Ambrosia");
             elements.Add("ambrosia", ambrosia);
 
             BuffItemUIIcon galaxyPearl = new BuffItemUIIcon(
                 item: new Item(ItemID.GalaxyPearl), usedItem: BuffViewerCondition.UsedGalaxyPearl,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.ThreeHundredths",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.Luck");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.GalaxyPearl",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.GalaxyPearl");
             elements.Add("galaxyPearl", galaxyPearl);
 
             BuffItemUIIcon aegisFruit = new BuffItemUIIcon(
                 item: new Item(ItemID.AegisFruit), usedItem: BuffViewerCondition.UsedAegisFruit,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Four",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.Defense");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.AegisFruit",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.AegisFruit");
             elements.Add("aegisFruit", aegisFruit);
 
             BuffItemUIIcon artisanLoaf = new BuffItemUIIcon(
                 item: new Item(ItemID.ArtisanLoaf), usedItem: BuffViewerCondition.UsedArtisanLoaf,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FourTiles",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.CraftStationAcessRange");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ArtisanLoaf",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ArtisanLoaf");
             elements.Add("artisanLoaf", artisanLoaf);
 
-            BuffItemUIIcon torchGod = new BuffItemUIIcon( // may need to make a new object for this
+            BuffItemUIIcon torchGod = new BuffItemUIIcon(
                 item: new Item(ItemID.TorchGodsFavor), usedItem: BuffViewerCondition.UsedTorchGod,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.DefaultText",
-                statIncrasedKey: "Mods.PermanentBuffViewer.DefaultText");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.TorchGodsFavor",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.TorchGodsFavor");
             elements.Add("torchGod", torchGod);
 
             DifficultyLockedItemUIIcon demonHeart = new DifficultyLockedItemUIIcon(
                 item: new Item(ItemID.DemonHeart), usedItem: BuffViewerCondition.UsedDemonHeart,
                 availableDifficulties: Condition.InExpertMode, 
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.One",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.AccessorySlot",
-                itemNotAvailableInCurrentDifficulty: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotAvailableInDifficulty");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.DemonHeart",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.DemonHeart",
+                itemNotAvailableInCurrentDifficulty: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotAvailableDifficulty");
             elements.Add("demonHeart", demonHeart);
 
             DifficultyLockedItemUIIcon minecartUpgrade = new DifficultyLockedItemUIIcon(
                 item: new Item(ItemID.MinecartPowerup), usedItem: BuffViewerCondition.UsedMinecartUpgrade,
                 availableDifficulties: Condition.InExpertMode,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.DefaultText",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MinecartStats",
-                itemNotAvailableInCurrentDifficulty: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotAvailableInDifficulty");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.MinecartUpgrade",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.MinecartUpgrade",
+                itemNotAvailableInCurrentDifficulty: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotAvailableDifficulty");
             elements.Add("minecartUpgrade", minecartUpgrade);
 
-            BuffItemUIIcon combatBook = new BuffItemUIIcon( // changes 2 stats
+            BuffItemUIIcon combatBook = new BuffItemUIIcon(
                 item: new Item(ItemID.CombatBook), usedItem: BuffViewerCondition.UsedCombatBook,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.DefaultText",
-                statIncrasedKey: "Mods.PermanentBuffViewer.DefaultText");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.CombatBook",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.CombatBook");
             elements.Add("combatBook", combatBook);
 
-            BuffItemUIIcon combatBookVolumeTwo = new BuffItemUIIcon( // changes 2 stats
+            BuffItemUIIcon combatBookVolumeTwo = new BuffItemUIIcon( 
                 item: new Item(ItemID.CombatBookVolumeTwo), usedItem: BuffViewerCondition.UsedCombatBookVolumeTwo,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.DefaultText",
-                statIncrasedKey: "Mods.PermanentBuffViewer.DefaultText");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.CombatBookVolumeTwo",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.CombatBook");
             elements.Add("combatBookVolumeTwo", combatBookVolumeTwo);
 
             BuffItemUIIcon peddlersSatchel = new BuffItemUIIcon(
                 item: new Item(ItemID.PeddlersSatchel), usedItem: BuffViewerCondition.UsedPeddlersSatchel,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed",
-                amountIncreaseByKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.One",
-                statIncrasedKey: "Mods.PermanentBuffViewer.Sprite.HoverText.Stats.NumTravelingMerchantItems");
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.PeddlersSatchel",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.PeddlersSatchel");
             elements.Add("peddlersSatchel", peddlersSatchel);
             return elements;
         }

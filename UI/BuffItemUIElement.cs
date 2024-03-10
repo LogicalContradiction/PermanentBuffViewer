@@ -22,8 +22,8 @@ namespace PermanentBuffViewer.UI
 
         internal LocalizedText itemUsedHoverText;
         internal LocalizedText itemNotUsedHoverText;
-        internal LocalizedText amountIncreaseBy;
-        internal LocalizedText statIncreased;
+        internal LocalizedText howToObtainText;
+        internal LocalizedText statModified;
 
         internal static ItemIconSortOrder sortOrder;
 
@@ -34,18 +34,18 @@ namespace PermanentBuffViewer.UI
         /// <param name="usedItem">The condition for showing the full sprite. The sprite will be a silhouette until the item has been used.</param>
         /// <param name="itemUsedHoverTextKey">Localization key for the text displayed when an item has been used.</param>
         /// <param name="itemNotUsedHoverTextKey">Localization key for the text displayed when an item has not yet been used.</param>
-        /// <param name="amountIncreaseByKey">Localization key describing the amount the stat is increased by.</param>
-        /// <param name="statIncrasedKey">Localization key describing the player stat that is increased.</param>
+        /// <param name="howToObtainKey">Localization key describing how this item is obtained.</param>
+        /// <param name="statModifiedKey">Localization key describing the stat that is modified.</param>
         public BuffItemUIElement(Item item, Condition usedItem,
             string itemUsedHoverTextKey, string itemNotUsedHoverTextKey,
-            string amountIncreaseByKey, string statIncrasedKey)
+            string howToObtainKey, string statModifiedKey)
         {
             this.item = item;
             this.usedItem = usedItem;
             itemUsedHoverText = Language.GetOrRegister(itemUsedHoverTextKey);
             itemNotUsedHoverText = Language.GetOrRegister(itemNotUsedHoverTextKey);
-            amountIncreaseBy = Language.GetOrRegister(amountIncreaseByKey);
-            statIncreased = Language.GetOrRegister(statIncrasedKey);
+            howToObtainText = Language.GetOrRegister(howToObtainKey);
+            this.statModified = Language.GetOrRegister(statModifiedKey);
             base.Width.Set(32f, 0f);
             base.Height.Set(32f, 0f);
             if (sortOrder == null) sortOrder = new ItemIconSortOrder();
@@ -60,6 +60,7 @@ namespace PermanentBuffViewer.UI
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             Vector2 screenPositionForItemCenter = base.GetDimensions().Center();
+            Color color = GetDrawColor();
             ItemSlot.DrawItemIcon(this.item, 31, spriteBatch, screenPositionForItemCenter, this.item.scale, 32f, GetDrawColor());
 
         }

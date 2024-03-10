@@ -1,7 +1,6 @@
 Conditions: {
 	UsedLifeCrystal: Mods.PermanentBuffViewer.Conditions.UsedLifeCrystal
 	UsedLifeFruit: Mods.PermanentBuffViewer.Conditions.UsedLifeFruit
-	UsedVitalCrystal: Mods.PermanentBuffViewer.Conditions.UsedVitalCrystal
 	UsedManaCrystal: Mods.PermanentBuffViewer.Conditions.UsedManaCrystal
 	UsedArcaneCrystal: Mods.PermanentBuffViewer.Conditions.UsedArcaneCrystal
 	UsedGummyWorm: Mods.PermanentBuffViewer.Conditions.UsedGummyWorm
@@ -13,44 +12,57 @@ Conditions: {
 	UsedCombatBook: Mods.PermanentBuffViewer.Conditions.UsedCombatBook
 	UsedCombatBookVolumeTwo: Mods.PermanentBuffViewer.Conditions.UsedCombatBookVolumeTwo
 	UsedPeddlersSatchel: Mods.PermanentBuffViewer.Conditions.UsedPeddlersSatchel
-}
-
-Sprite: {
-	HoverText: {
-		Item: {
-			MultiUsed: Mods.PermanentBuffViewer.Sprite.HoverText.Item.MultiUsed
-			NotUsed: Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotUsed
-			SingleUsed: Mods.PermanentBuffViewer.Sprite.HoverText.Item.SingleUsed
-			NotAvailableInDifficulty: Mods.PermanentBuffViewer.Sprite.HoverText.Item.NotAvailableInDifficulty
-		}
-
-		Numbers: {
-			Twenty: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Twenty
-			Five: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Five
-			TwentyPercent: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.TwentyPercent
-			FivePercent: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FivePercent
-			Three: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Three
-			ThreeHundredths: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.ThreeHundredths
-			Four: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.Four
-			FourTiles: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.FourTiles
-			One: Mods.PermanentBuffViewer.Sprite.HoverText.Numbers.One
-		}
-
-		Stats: {
-			MaxLife: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxLife
-			HealthRegenTime: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.HealthRegenTime
-			MaxMana: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MaxMana
-			ManaRegenDelay: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.ManaRegenDelay
-			FishingPower: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.FishingPower
-			MineAndWallPlaceSpeed: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MineAndWallPlaceSpeed
-			Luck: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.Luck
-			Defense: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.Defense
-			CraftStationAcessRange: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.CraftStationAcessRange
-			AccessorySlot: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.AccessorySlot
-			MinecartStats: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.MinecartStats
-			NumTravelingMerchantItems: Mods.PermanentBuffViewer.Sprite.HoverText.Stats.NumTravelingMerchantItems
-		}
-	}
+	UsedAegisCrystal: Mods.PermanentBuffViewer.Conditions.UsedAegisCrystal
+	UsedTorchGod: Mods.PermanentBuffViewer.Conditions.UsedTorchGod
 }
 
 DefaultText: Mods.PermanentBuffViewer.DefaultText
+
+UI: {
+	ItemIcon: {
+		HoverText: {
+			MultiUsed: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed
+			NotUsed: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed
+
+			HowToObtain: {
+				LifeCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal
+				LifeFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeFruit
+				AegisCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.AegisCrystal
+				ManaCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ManaCrystal
+				ArcaneCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ArcaneCrystal
+				GummyWorm: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.GummyWorm
+				Ambrosia: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.Ambrosia
+				GalaxyPearl: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.GalaxyPearl
+				AegisFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.AegisFruit
+				ArtisanLoaf: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ArtisanLoaf
+				TorchGodsFavor: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.TorchGodsFavor
+				DemonHeart: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.DemonHeart
+				MinecartUpgrade: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.MinecartUpgrade
+				CombatBook: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.CombatBook
+				CombatBookVolumeTwo: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.CombatBookVolumeTwo
+				PeddlersSatchel: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.PeddlersSatchel
+			}
+
+			ModifiedStats: {
+				LifeCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal
+				LifeFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeFruit
+				AegisCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.AegisCrystal
+				ManaCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ManaCrystal
+				ArcaneCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ArcaneCrystal
+				GummyWorm: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.GummyWorm
+				Ambrosia: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.Ambrosia
+				GalaxyPearl: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.GalaxyPearl
+				AegisFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.AegisFruit
+				ArtisanLoaf: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ArtisanLoaf
+				TorchGodsFavor: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.TorchGodsFavor
+				DemonHeart: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.DemonHeart
+				MinecartUpgrade: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.MinecartUpgrade
+				CombatBook: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.CombatBook
+				PeddlersSatchel: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.PeddlersSatchel
+			}
+
+			SingleUsed: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed
+			NotAvailableDifficulty: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotAvailableDifficulty
+		}
+	}
+}
