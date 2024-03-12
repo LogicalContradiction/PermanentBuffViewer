@@ -8,6 +8,9 @@ using Terraria;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
+using Terraria.ID;
+using ReLogic.Content;
 
 namespace PermanentBuffViewer.UI
 {
@@ -60,8 +63,24 @@ namespace PermanentBuffViewer.UI
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             Vector2 screenPositionForItemCenter = base.GetDimensions().Center();
-            Color color = GetDrawColor();
-            ItemSlot.DrawItemIcon(this.item, 31, spriteBatch, screenPositionForItemCenter, this.item.scale, 32f, GetDrawColor());
+            //ItemSlot.DrawItemIcon(this.item, 31, spriteBatch, screenPositionForItemCenter, this.item.scale, 32f, GetDrawColor());
+            int itemID = item.type;
+            Texture2D value = Main.Assets.Request<Texture2D>($"Images/Item_{item.type}", AssetRequestMode.ImmediateLoad).Value;  //TextureAssets.Item[itemID].Value;
+            Rectangle frame = ((Main.itemAnimations[itemID] == null) ? value.Frame() : Main.itemAnimations[itemID].GetFrame(value));
+            Vector2 origin = frame.Size() / 2f;
+            Vector2 screenPositionForCenter = GetDimensions().Center();
+            // calculate the scale of the item
+            float sizeLimit = 32f;
+            float itemScale = item.scale;
+            float scale1 = 1f;
+            float scale2 = 1f;
+            if ((float)frame.Width > sizeLimit || (float)frame.Height > sizeLimit)
+            {
+                scale2 = ((frame.Width <= frame.Height) ? (sizeLimit / (float)frame.Height) : (sizeLimit / (float)frame.Width));
+            }
+            float finalDrawScale = itemScale * scale1 * scale2;
+            SpriteEffects effects = SpriteEffects.None;
+            spriteBatch.Draw(value, screenPositionForCenter, frame, GetDrawColor(), 0f, origin, finalDrawScale, effects, 0f);
 
         }
 
