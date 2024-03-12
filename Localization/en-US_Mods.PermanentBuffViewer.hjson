@@ -21,48 +21,70 @@ DefaultText: Mods.PermanentBuffViewer.DefaultText
 UI: {
 	ItemIcon: {
 		HoverText: {
-			MultiUsed: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed
-			NotUsed: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed
+			MultiUsed:
+				'''
+				{0}
+				{1}/{2} used
+				{3}
+				'''
+			NotUsed:
+				'''
+				This item has not yet been used
+				{0}
+				'''
 
 			HowToObtain: {
-				LifeCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal
-				LifeFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeFruit
-				AegisCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.AegisCrystal
-				ManaCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ManaCrystal
-				ArcaneCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ArcaneCrystal
-				GummyWorm: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.GummyWorm
-				Ambrosia: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.Ambrosia
-				GalaxyPearl: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.GalaxyPearl
-				AegisFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.AegisFruit
-				ArtisanLoaf: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.ArtisanLoaf
-				TorchGodsFavor: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.TorchGodsFavor
-				DemonHeart: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.DemonHeart
-				MinecartUpgrade: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.MinecartUpgrade
-				CombatBook: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.CombatBook
-				CombatBookVolumeTwo: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.CombatBookVolumeTwo
-				PeddlersSatchel: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.PeddlersSatchel
+				LifeCrystal: Try exploring the Underground and Caverns
+				LifeFruit: Try exploring the Jungle after beating (insert boss here)
+				AegisCrystal: Try throwing a Life Crystal into the Shimmer
+				ManaCrystal: Try crafting one using 3 fallen stars at a workbench
+				ArcaneCrystal: Try throwing a Mana Crystal into Shimmer
+				GummyWorm: Try throwing a Gold Worm into Shimmer
+				Ambrosia: Try throwing any type of fruit into Shimmer
+				GalaxyPearl: Try throwing a Pink Pearl into Shimmer
+				AegisFruit: Try throwing a Life Fruit into Shimmer
+				ArtisanLoaf: Try purchasing it from the Skeleton Merchant in the Cavern layer
+				TorchGodsFavor: Try placing 101 torches close together below the surface layer and survive the trial
+				DemonHeart: Try defeating the Wall of Flesh
+				MinecartUpgrade: Try crafting this after defeating all three mechanical bosses
+				CombatBook: Try fishing during a Blood Moon
+				CombatBookVolumeTwo: Try throwing a Spell Tome into Shimmer
+				PeddlersSatchel: Try throwing a Peddler's Hat into Shimmer
 			}
 
 			ModifiedStats: {
-				LifeCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal
-				LifeFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeFruit
-				AegisCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.AegisCrystal
-				ManaCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ManaCrystal
-				ArcaneCrystal: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ArcaneCrystal
-				GummyWorm: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.GummyWorm
-				Ambrosia: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.Ambrosia
-				GalaxyPearl: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.GalaxyPearl
-				AegisFruit: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.AegisFruit
-				ArtisanLoaf: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.ArtisanLoaf
-				TorchGodsFavor: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.TorchGodsFavor
-				DemonHeart: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.DemonHeart
-				MinecartUpgrade: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.MinecartUpgrade
-				CombatBook: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.CombatBook
-				PeddlersSatchel: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.PeddlersSatchel
+				LifeCrystal: +20 maximum health
+				LifeFruit: +5 maximum health
+				AegisCrystal: -20% time to reach maximum health regen
+				ManaCrystal: +20 maximum mana
+				ArcaneCrystal: Reduces delay before mana begins regenerating by 5% when moving and 2.5% when standing still
+				GummyWorm: +3 fishing power
+				Ambrosia: +5% mining, tile, and wall placement speed
+				GalaxyPearl: +0.03 luck
+				AegisFruit: +4 defense
+				ArtisanLoaf: +4 tile range to access crafting stations
+				TorchGodsFavor: Placing normal torches and campfires will convert them to the current biome's variant
+				DemonHeart: +1 accessory slot
+				MinecartUpgrade:
+					'''
+					increased max speed (102 mph) and acceleration (31 mph/s)
+					increased defense while riding a minecart dependent on current minecart speed (+2 when still, +7 at top speed)
+					minecart gains a laser attack that auto-targets enemies
+					'''
+				CombatBook: Town NPCs gain +6 defense and +20% attack damage
+				PeddlersSatchel: Traveling Merchant sells +1 item
 			}
 
-			SingleUsed: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.SingleUsed
-			NotAvailableDifficulty: Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotAvailableDifficulty
+			SingleUsed:
+				'''
+				{0}
+				{1}
+				'''
+			NotAvailableDifficulty:
+				'''
+				This item is only available in Expert mode or higher
+				It has been used, but grants you no bonus in this world
+				'''
 		}
 	}
 }

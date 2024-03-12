@@ -88,12 +88,12 @@ namespace PermanentBuffViewer.UI
                     return itemNotUsedHoverText.Format();
                 }
                 // Item has been used but is not available in current world.
-                return itemNotAvailableInCurrentDifficulty.Format();
+                return itemNotAvailableInCurrentDifficulty.Value;
             }
             // Item was used and is available in this world.
-            if (usedItem.IsMet()) return itemUsedHoverText.Format();
+            if (usedItem.IsMet()) return itemUsedHoverText.Format(item.Name, statModified.Value);
             // Item wasn't used but is available.
-            return itemNotUsedHoverText.Format();
+            return itemNotUsedHoverText.Format(howToObtainText.Value);
         }
     }
 }
