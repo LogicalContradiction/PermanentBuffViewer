@@ -42,8 +42,20 @@ namespace PermanentBuffViewer
         public void CreateAllTestPanels()
         {
             testPanels = new List<UIPanel>();
+
+            // panel to test the item sprites
             UIPanel testItemSpritePanel = CreateTestItemSpritePanel();
+            testItemSpritePanel.Left = StyleDimension.FromPixels(5);
+            testItemSpritePanel.VAlign = 0.5f;
             testPanels.Add(testItemSpritePanel);
+
+            // panel to test grid and sorting of elements
+            UIPanel testGridSortPanel = CreateGridTestPanel();
+            testGridSortPanel.Left = StyleDimension.FromPixels(testItemSpritePanel.Left.Pixels + testItemSpritePanel.Width.Pixels + 15);
+            testGridSortPanel.VAlign = 0.5f;
+            testPanels.Add(testGridSortPanel);
+
+
         }
 
         /// <summary>
@@ -54,9 +66,10 @@ namespace PermanentBuffViewer
         {
             UIPanel panel = new UIPanel();
             panel.Width = StyleDimension.FromPixels(300);
-            panel.Height = StyleDimension.FromPercent(0.5f);
-            panel.HAlign = 0.5f;
-            panel.VAlign = 0.5f;
+            panel.Height = StyleDimension.FromPixels(300);
+            
+            //panel.HAlign = 0.5f;
+            //panel.VAlign = 0.5f;
 
             UIText headerText = new UIText("Item Sprite Test");
             headerText.HAlign = 0.5f;
@@ -96,6 +109,41 @@ namespace PermanentBuffViewer
                     rowCount++;
                 }
             }
+            return panel;
+        }
+
+        /// <summary>
+        /// Create a panel for testing the default UIGrid and the sorting of the BuffItemUIIcons.
+        /// </summary>
+        /// <returns>A panel with all the BuffItemUIIcons in a grid as well as noting the order they were added.</returns>
+        public UIPanel CreateGridTestPanel()
+        {
+            var panel = new UIPanel();
+            panel.Width = StyleDimension.FromPixels(300);
+            panel.Height = StyleDimension.FromPixels(625);
+
+            UIText headerLabel = new UIText("Grid and Sorting Test");
+            headerLabel.HAlign = 0.5f;
+            panel.Append(headerLabel);
+            
+            UIGrid grid = new UIGrid();
+            grid.Width = StyleDimension.Fill;
+            grid.Height = StyleDimension.FromPixels(105);
+            grid.Top = StyleDimension.FromPixels(25);
+            panel.Append(grid);
+
+            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
+            List<string> orderAdded = new List<string>();
+            // add the elements in reverse order
+            foreach (var key in elements.Keys.Reverse())
+            {
+                orderAdded.Add(key);
+                grid.Add(elements[key]);
+            }
+            UIText orderAddedText = new UIText("Order Added:\n" + String.Join("\n", orderAdded));
+            orderAddedText.Top = StyleDimension.FromPixels(grid.Top.Pixels + grid.Height.Pixels + 10);
+            panel.Append(orderAddedText);
+
             return panel;
         }
 
