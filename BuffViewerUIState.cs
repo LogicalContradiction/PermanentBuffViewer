@@ -19,12 +19,15 @@ namespace PermanentBuffViewer
     {
         public static BuffViewerModSystem ModSystem { get; private set; }
         public List<UIPanel> testPanels;
+        public List<UIElement> updateOnWorldEnter;
 
 
         public override void OnInitialize()
         {
             ContentInstance.Register(this);
+            updateOnWorldEnter = new List<UIElement>();
             CreateAllTestPanels();
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -47,13 +50,19 @@ namespace PermanentBuffViewer
             UIPanel testItemSpritePanel = CreateTestItemSpritePanel();
             testItemSpritePanel.Left = StyleDimension.FromPixels(5);
             testItemSpritePanel.VAlign = 0.5f;
-            testPanels.Add(testItemSpritePanel);
+            //testPanels.Add(testItemSpritePanel);
 
             // panel to test grid and sorting of elements
             UIPanel testGridSortPanel = CreateGridTestPanel();
             testGridSortPanel.Left = StyleDimension.FromPixels(testItemSpritePanel.Left.Pixels + testItemSpritePanel.Width.Pixels + 15);
             testGridSortPanel.VAlign = 0.5f;
-            testPanels.Add(testGridSortPanel);
+            //testPanels.Add(testGridSortPanel);
+
+            // panel to test custom grid
+            UIPanel testCustomGridPanel = CreateCustomGridTestPanel();
+            testCustomGridPanel.Left = StyleDimension.FromPixels(testGridSortPanel.Left.Pixels + testGridSortPanel.Width.Pixels + 15);
+            testCustomGridPanel.VAlign = 0.5f;
+            testPanels.Add(testCustomGridPanel);
 
 
         }
@@ -145,6 +154,52 @@ namespace PermanentBuffViewer
             panel.Append(orderAddedText);
 
             return panel;
+        }
+
+        /// <summary>
+        /// Create a panel for testing BuffItemUIGrid.
+        /// </summary>
+        /// <returns></returns>
+        public UIPanel CreateCustomGridTestPanel()
+        {
+            var panel = new UIPanel();
+            panel.Width = StyleDimension.FromPixels(300);
+            panel.Height = StyleDimension.FromPixels(300);
+
+            UIText headerLabel = new UIText("Custom Grid Test");
+            headerLabel.HAlign = 0.5f;
+            panel.Append(headerLabel);
+
+            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
+            BuffItemUIGrid grid = new BuffItemUIGrid();
+            grid.Top = StyleDimension.FromPixels(25);
+            grid.Width = StyleDimension.Fill;
+            grid.Height = StyleDimension.Fill;
+            panel.Append(grid);
+
+            foreach (var key in elements.Keys)
+            {
+                grid.Add(elements[key]);
+            }
+            grid.RegisterWorldCheckElement(elements["demonHeart"]);
+            grid.RegisterWorldCheckElement(elements["minecartUpgrade"]);
+            // register this grid so it gets updated when the player enters the world
+            updateOnWorldEnter.Add(grid);
+            return panel;
+        }
+
+        /// <summary>
+        /// To be called when a player enters a world. Has registered elements determine if children need to be added/removed based on the world.
+        /// </summary>
+        public void UpdateUIElementsOnWorldEnter()
+        {
+            foreach (var element in updateOnWorldEnter)
+            {
+                if (element is BuffItemUIGrid)
+                {
+                    ((BuffItemUIGrid)element).UpdateGridUIElementsOnWorldEnter();
+                }
+            }
         }
 
         public Dictionary<string, BuffItemUIElement> CreateBuffItemIcons()

@@ -97,7 +97,7 @@ namespace PermanentBuffViewer.UI
         /// Checks if the current element is in the UI.
         /// </summary>
         /// <returns>True if this element is in the UI, False if it is not.</returns>
-        public bool InUI()
+        public bool IsInUI()
         {
             return Parent != null;
         }
