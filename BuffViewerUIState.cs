@@ -12,6 +12,7 @@ using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.UI;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PermanentBuffViewer
 {
@@ -63,6 +64,12 @@ namespace PermanentBuffViewer
             testCustomGridPanel.Left = StyleDimension.FromPixels(testGridSortPanel.Left.Pixels + testGridSortPanel.Width.Pixels + 15);
             testCustomGridPanel.VAlign = 0.5f;
             testPanels.Add(testCustomGridPanel);
+
+            // panel to test UISingleRow
+            UIPanel testUISingleRowPanel = CreateUISingleRowTestPanel();
+            testUISingleRowPanel.Left.Set(testCustomGridPanel.Left.Pixels + testCustomGridPanel.Width.Pixels + 15, 0f);
+            testUISingleRowPanel.VAlign = 0.5f;
+            testPanels.Add(testUISingleRowPanel);
 
 
         }
@@ -185,6 +192,60 @@ namespace PermanentBuffViewer
             grid.RegisterWorldCheckElement(elements["minecartUpgrade"]);
             // register this grid so it gets updated when the player enters the world
             updateOnWorldEnter.Add(grid);
+            return panel;
+        }
+
+        public UIPanel CreateUISingleRowTestPanel()
+        {
+            var panel = new UIPanel();
+            panel.Width = StyleDimension.FromPixels(300);
+            panel.Height = StyleDimension.FromPixels(300);
+
+            UIText headerLabel = new UIText("UISingleRow Test");
+            headerLabel.HAlign = 0.5f;
+            panel.Append(headerLabel);
+            
+            UISingleRow row = new UISingleRow();
+            row.Top.Set(25f, 0f);
+            row.Width.Set(80f, 0f);
+            row.Height.Set(40f, 0f);
+            panel.Append(row);
+
+            UIText rowExpectedWidthText = new UIText($"Row expected width: {row.ExpectedWidth}");
+            rowExpectedWidthText.Top.Set(60f, 0f);
+            panel.Append(rowExpectedWidthText);
+
+            UIText rowExpectedHeightText = new UIText($"Row excpected height: {row.ExpectedHeight}");
+            rowExpectedHeightText.Top.Set(90f, 0f);
+            panel.Append(rowExpectedHeightText);
+
+            UIText rowWidthText = new UIText($"Row width: {row.Width.Pixels}");
+            rowWidthText.Top.Set(120f, 0f);
+            panel.Append(rowWidthText);
+
+            UIText rowHeightText = new UIText($"Row height: {row.Height.Pixels}");
+            rowHeightText.Top.Set(150f, 0f);
+            panel.Append(rowHeightText);
+
+            UIImageButton button = new UIImageButton(Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", mode: ReLogic.Content.AssetRequestMode.ImmediateLoad));
+            button.Top.Set(180f, 0f);
+            button.OnLeftClick += delegate
+            {
+                MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
+                item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
+                row.Add(lifeCrystal);
+                
+                rowExpectedWidthText.SetText($"Row expected width: {row.ExpectedWidth}");
+                rowExpectedHeightText.SetText($"Row excpected height: {row.ExpectedHeight}");
+                rowWidthText.SetText($"Row width: {row.Width.Pixels}");
+                rowHeightText.SetText($"Row height: {row.Height.Pixels}");
+            };
+            panel.Append(button);
+
             return panel;
         }
 
