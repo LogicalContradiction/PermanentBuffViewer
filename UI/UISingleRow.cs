@@ -43,6 +43,10 @@ namespace PermanentBuffViewer.UI
 
         }
 
+        /// <summary>
+        /// Adds element to this row.
+        /// </summary>
+        /// <param name="item">The element to add to this row.</param>
         public void Add(UIElement item)
         {
             items.Add(item);
@@ -51,6 +55,14 @@ namespace PermanentBuffViewer.UI
             Recalculate();
         }
 
+        /// <summary>
+        /// Removes an element from this row.
+        /// </summary>
+        /// <param name="item">The element to remove from this row.</param>
+        /// <returns>
+        /// True if the element was successfully removed, otherwise, False. <br/>
+        /// Also returns false if the element was not found. 
+        /// </returns>
         public bool Remove(UIElement item)
         {
             RemoveChild(item);
@@ -58,6 +70,9 @@ namespace PermanentBuffViewer.UI
             return items.Remove(item);
         }
 
+        /// <summary>
+        /// Sorts the items this element holds.
+        /// </summary>
         public void UpdateOrder()
         {
             items.Sort(DefaultSortMethod);
@@ -68,6 +83,9 @@ namespace PermanentBuffViewer.UI
             return item1.CompareTo(item2);
         }
 
+        /// <summary>
+        /// Removes all items from this element.
+        /// </summary>
         public void Clear()
         {
             RemoveAllChildren();
