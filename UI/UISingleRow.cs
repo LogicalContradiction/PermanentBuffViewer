@@ -12,6 +12,7 @@ namespace PermanentBuffViewer.UI
     {
 
         public List<UIElement> items = new List<UIElement>();
+        public List<UIElement> updateOnWorldEntry = new List<UIElement>();
         
         public float ElementPadding = 5f;
         public float ExpectedWidth
@@ -44,12 +45,14 @@ namespace PermanentBuffViewer.UI
         }
 
         /// <summary>
-        /// Adds element to this row.
+        /// Adds element to this row. Also tracks if an item should be updated when joining a world.
         /// </summary>
         /// <param name="item">The element to add to this row.</param>
-        public void Add(UIElement item)
+        /// <param name="registerIfNeeded">Default: True will register this element if it's a difficulty locked item so it can be removed in a world that can't use it.</param>
+        public void Add(UIElement item, bool registerIfNeeded = true)
         {
             items.Add(item);
+            if (item is DifficultyLockedItemUIIcon && registerIfNeeded) updateOnWorldEntry.Add(item);
             Append(item);
             UpdateOrder();
             Recalculate();
@@ -59,13 +62,15 @@ namespace PermanentBuffViewer.UI
         /// Removes an element from this row.
         /// </summary>
         /// <param name="item">The element to remove from this row.</param>
+        /// <param name="unregisterIfNeeded">Default: True. Will unregister this element in the case it no loger needs to receive changes on world entry.</param>
         /// <returns>
         /// True if the element was successfully removed, otherwise, False. <br/>
         /// Also returns false if the element was not found. 
         /// </returns>
-        public bool Remove(UIElement item)
+        public bool Remove(UIElement item, bool unregisterIfNeeded = true)
         {
             RemoveChild(item);
+            if (item is DifficultyLockedItemUIIcon && unregisterIfNeeded) updateOnWorldEntry.Remove(item);
             UpdateOrder();
             return items.Remove(item);
         }
@@ -113,6 +118,20 @@ namespace PermanentBuffViewer.UI
         {
             if (Width.Pixels < ExpectedWidth) Width.Set(ExpectedWidth, 0f);
             if (Height.Pixels < ExpectedHeight) Height.Set(ExpectedHeight, 0f);
+        }
+
+        public void UpdateElementsForWorldEntry()
+        {
+            foreach (UIElement element in updateOnWorldEntry)
+            {
+                if (element is DifficultyLockedItemUIIcon buffElement)
+                {
+                    // Add elements that aren't in but should be
+                    if (buffElement.ShouldBeAddedToRendering() && !buffElement.IsInUI()) Add(buffElement, registerIfNeeded: false);
+                    // Remove elements that are in but shouldn't be
+                    else if (!buffElement.ShouldBeAddedToRendering() && buffElement.IsInUI()) Remove(buffElement, unregisterIfNeeded: false);
+                }
+            }
         }
 
     }

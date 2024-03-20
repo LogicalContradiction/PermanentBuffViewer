@@ -63,13 +63,19 @@ namespace PermanentBuffViewer
             UIPanel testCustomGridPanel = CreateCustomGridTestPanel();
             testCustomGridPanel.Left = StyleDimension.FromPixels(testGridSortPanel.Left.Pixels + testGridSortPanel.Width.Pixels + 15);
             testCustomGridPanel.VAlign = 0.5f;
-            testPanels.Add(testCustomGridPanel);
+            //testPanels.Add(testCustomGridPanel);
 
-            // panel to test UISingleRow
+            // panel to test resizing UISingleRow
             UIPanel testUISingleRowPanel = CreateUISingleRowTestPanel();
-            testUISingleRowPanel.Left.Set(testCustomGridPanel.Left.Pixels + testCustomGridPanel.Width.Pixels + 15, 0f);
+            testUISingleRowPanel.Left.Set(testItemSpritePanel.Left.Pixels + testItemSpritePanel.Width.Pixels + 15, 0f);
             testUISingleRowPanel.VAlign = 0.5f;
-            testPanels.Add(testUISingleRowPanel);
+            //testPanels.Add(testUISingleRowPanel);
+
+            // panel to test sorting of UISingleRow
+            UIPanel testUISingleRowSort = CreateUISingleRowSortTestPanel();
+            testUISingleRowSort.HAlign = 0.5f;
+            testUISingleRowSort.VAlign = 0.5f;
+            testPanels.Add(testUISingleRowSort);
 
 
         }
@@ -195,6 +201,10 @@ namespace PermanentBuffViewer
             return panel;
         }
 
+        /// <summary>
+        /// Creates a panel for testing the resizing of UISingleRow
+        /// </summary>
+        /// <returns></returns>
         public UIPanel CreateUISingleRowTestPanel()
         {
             var panel = new UIPanel();
@@ -250,6 +260,41 @@ namespace PermanentBuffViewer
         }
 
         /// <summary>
+        /// Creates a panel to test the sorting of UISingleRow
+        /// </summary>
+        /// <returns></returns>
+        public UIPanel CreateUISingleRowSortTestPanel()
+        {
+            var panel = new UIPanel();
+            panel.Width.Set(630f, 0f);
+            panel.Height.Set(600f, 0f);
+
+            var headerText = new UIText("Test Sorting UISingleRow");
+            headerText.HAlign = 0.5f;
+            panel.Append(headerText);
+
+            var row = new UISingleRow();
+            row.Width.Set(590f, 0f);
+            row.Height.Set(40f, 0f);
+            row.Top.Set(25f, 0f);
+            panel.Append(row);
+
+            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
+            List<string> reverseKeys = elements.Keys.Reverse().ToList();
+
+            foreach (var key in reverseKeys) row.Add(elements[key]);
+            var orderAddedText = new UIText("Order Added:\n" + String.Join("\n", reverseKeys));
+            orderAddedText.Top = StyleDimension.FromPixels(row.Top.Pixels + row.Height.Pixels + 10);
+            panel.Append(orderAddedText);
+
+            // place so item gets updated on world enter
+            updateOnWorldEnter.Add(row);
+
+            return panel;
+        }
+
+
+        /// <summary>
         /// To be called when a player enters a world. Has registered elements determine if children need to be added/removed based on the world.
         /// </summary>
         public void UpdateUIElementsOnWorldEnter()
@@ -260,6 +305,7 @@ namespace PermanentBuffViewer
                 {
                     ((BuffItemUIGrid)element).UpdateGridUIElementsOnWorldEnter();
                 }
+                if (element is UISingleRow row) row.UpdateElementsForWorldEntry();
             }
         }
 
