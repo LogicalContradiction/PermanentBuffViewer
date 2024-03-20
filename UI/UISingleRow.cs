@@ -8,7 +8,7 @@ using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
 {
-    internal class UISingleRow : UIElement
+    internal class UISingleRow : UIElement, IUpdateElementsOnWorldEntry
     {
 
         public List<UIElement> items = new List<UIElement>();
@@ -120,7 +120,7 @@ namespace PermanentBuffViewer.UI
             if (Height.Pixels < ExpectedHeight) Height.Set(ExpectedHeight, 0f);
         }
 
-        public void UpdateElementsForWorldEntry()
+        public void UpdateElementsOnWorldEntry()
         {
             foreach (UIElement element in updateOnWorldEntry)
             {

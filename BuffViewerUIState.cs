@@ -305,7 +305,7 @@ namespace PermanentBuffViewer
                 {
                     ((BuffItemUIGrid)element).UpdateGridUIElementsOnWorldEnter();
                 }
-                if (element is UISingleRow row) row.UpdateElementsForWorldEntry();
+                if (element is IUpdateElementsOnWorldEntry row) row.UpdateElementsOnWorldEntry();
             }
         }
 
