@@ -8,7 +8,7 @@ using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
 {
-    internal class UISingleRow : UIElement, IUpdateElementsOnWorldEntry
+    internal class UISubrow : UIElement, IUpdateElementsOnWorldEntry
     {
 
         public List<UIElement> items = new List<UIElement>();
@@ -39,7 +39,7 @@ namespace PermanentBuffViewer.UI
         }
 
 
-        public UISingleRow()
+        public UISubrow()
         {
 
         }
