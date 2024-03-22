@@ -13,7 +13,8 @@ namespace PermanentBuffViewer.UI
 
         public List<UIElement> items = new List<UIElement>();
         public List<UIElement> updateOnWorldEntry = new List<UIElement>();
-        
+
+        public float defaultHeight = 40f;
         public float ElementPadding = 5f;
         public float ExpectedWidth
         {
