@@ -215,7 +215,7 @@ namespace PermanentBuffViewer
             headerLabel.HAlign = 0.5f;
             panel.Append(headerLabel);
             
-            UISingleRow row = new UISingleRow();
+            UISubrow row = new UISubrow();
             row.Top.Set(25f, 0f);
             row.Width.Set(80f, 0f);
             row.Height.Set(40f, 0f);
@@ -273,7 +273,7 @@ namespace PermanentBuffViewer
             headerText.HAlign = 0.5f;
             panel.Append(headerText);
 
-            var row = new UISingleRow();
+            var row = new UISubrow();
             row.Width.Set(590f, 0f);
             row.Height.Set(40f, 0f);
             row.Top.Set(25f, 0f);
