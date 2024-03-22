@@ -13,6 +13,7 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.UI;
 using Microsoft.Xna.Framework.Graphics;
+using PermanentBuffViewer.UI.Interface;
 
 namespace PermanentBuffViewer
 {

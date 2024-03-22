@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PermanentBuffViewer.UI
+namespace PermanentBuffViewer.UI.Interface
 {
     internal interface IUpdateElementsOnWorldEntry
     {

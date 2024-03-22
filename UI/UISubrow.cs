@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PermanentBuffViewer.UI.Interface;
 using Terraria;
 using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
 {
-    internal class UISubrow : UIElement, IUpdateElementsOnWorldEntry
+    internal class UISubrow : UIElement, IUpdateElementsOnWorldEntry,
+        IExpectedSize, IAdjustableSize
     {
 
         public List<UIElement> items = new List<UIElement>();
