@@ -76,7 +76,13 @@ namespace PermanentBuffViewer
             UIPanel testUISingleRowSort = CreateUISingleRowSortTestPanel();
             testUISingleRowSort.HAlign = 0.5f;
             testUISingleRowSort.VAlign = 0.5f;
-            testPanels.Add(testUISingleRowSort);
+            //testPanels.Add(testUISingleRowSort);
+
+            // panel to test implementation of UIList
+            UIPanel testSubrowList2 = CreateSubrowResizeTestPanel();
+            testSubrowList2.VAlign = 0.3f;
+            testSubrowList2.Left.Set(20f, 0f);
+            testPanels.Add(testSubrowList2);
 
 
         }
@@ -290,6 +296,86 @@ namespace PermanentBuffViewer
 
             // place so item gets updated on world enter
             updateOnWorldEnter.Add(row);
+
+            return panel;
+        }
+
+        public UIPanel CreateSubrowResizeTestPanel()
+        {
+            var panel = new UIPanel();
+            panel.Width.Set(300f, 0f);
+            panel.Height.Set(500f, 0f);
+
+            var headerText = new UIText("Subrow2 test");
+            headerText.HAlign = 0.5f;
+            panel.Append(headerText);
+            var subrowList = new UISubrowList();
+            subrowList.Top.Set(30f, 0f);
+            subrowList.Width.Set(80f, 0f);
+            subrowList.Height.Set(120f, 0f);
+            panel.Append(subrowList);
+
+            UIText expectedHeightText = new UIText($"Expected height: {subrowList.ExpectedHeight}");
+            expectedHeightText.Top.Set(300f, 0f);
+            panel.Append(expectedHeightText);
+            UIText expectedWidthText = new UIText($"Expected width: {subrowList.ExpectedWidth}");
+            expectedWidthText.Top.Set(340f, 0f);
+            panel.Append(expectedWidthText);
+            UIText actualHeightText = new UIText($"Actual height: {subrowList.Height.Pixels}");
+            actualHeightText.Top.Set(380f, 0f);
+            panel.Append(actualHeightText);
+            UIText actualWidthText = new UIText($"Actual width: {subrowList.Width.Pixels}");
+            actualWidthText.Top.Set(420f, 0f);
+            panel.Append(actualWidthText);
+
+            var addElementButton = new UIImageButton(
+                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", 
+                mode: ReLogic.Content.AssetRequestMode.ImmediateLoad));
+            addElementButton.Top.Set(200f, 0f);
+            addElementButton.OnLeftClick += delegate
+            {
+                MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
+                item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
+                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
+                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
+                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
+                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
+                int index = subrowList.Count - 1;
+                subrowList.AddElementToSubrow(index, lifeCrystal);
+                //subrowList2.AdjustSize();
+                expectedHeightText.SetText($"Expected height: {subrowList.ExpectedHeight}");
+                expectedWidthText.SetText($"Expected width: {subrowList.ExpectedWidth}");
+                actualHeightText.SetText($"Actual height: {subrowList.Height.Pixels}");
+                actualWidthText.SetText($"Actual width: {subrowList.Width.Pixels}");
+            };
+            panel.Append(addElementButton);
+
+            var addRowButton = new UIImageButton(
+                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", 
+                mode: ReLogic.Content.AssetRequestMode.ImmediateLoad));
+            addRowButton.Top.Set(240f, 0f);
+            addRowButton.OnLeftClick += delegate
+            {
+                subrowList.CreateNewSubrow();
+                //subrowList2.AdjustSize();
+                expectedHeightText.SetText($"Expected height: {subrowList.ExpectedHeight}");
+                expectedWidthText.SetText($"Expected width: {subrowList.ExpectedWidth}");
+                actualHeightText.SetText($"Actual height: {subrowList.Height.Pixels}");
+                actualWidthText.SetText($"Actual width: {subrowList.Width.Pixels}");
+            };
+            panel.Append(addRowButton);
+
+            UIText addElementText = new UIText("Add element");
+            addElementText.Top.Set(addElementButton.Top.Pixels, 0f);
+            addElementText.Left.Set(40f, 0f);
+            panel.Append(addElementButton);
+
+            UIText addRowText = new UIText("Add row");
+            addRowText.Top.Set(addRowButton.Top.Pixels, 0f);
+            addRowText.Left.Set(40f, 0f);
+            panel.Append(addElementButton);
+
+
 
             return panel;
         }
