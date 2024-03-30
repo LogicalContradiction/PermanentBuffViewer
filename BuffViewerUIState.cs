@@ -20,366 +20,41 @@ namespace PermanentBuffViewer
     internal class BuffViewerUIState : UIState
     {
         public static BuffViewerModSystem ModSystem { get; private set; }
-        public List<UIPanel> testPanels;
-        public List<UIElement> updateOnWorldEnter;
+        public List<IUpdateElementsOnWorldEntry> updateOnWorldEnter;
+
+        public TestPanels testPanels;
 
 
         public override void OnInitialize()
         {
             ContentInstance.Register(this);
-            updateOnWorldEnter = new List<UIElement>();
-            CreateAllTestPanels();
+            updateOnWorldEnter = new List<IUpdateElementsOnWorldEntry>();
+            testPanels = new TestPanels();
+            //CreateAllTestPanels();
             
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (testPanels != null)
+            foreach (var panel in testPanels.GetElementsToAdd()) this.AddOrRemoveChild(panel, Main.playerInventory);
+            // Remove the old panel if there was one.
+            UIPanel oldPanel = testPanels.GetPrevPanel();
+            if (oldPanel != null)
             {
-                foreach (var panel in testPanels) this.AddOrRemoveChild(panel, Main.playerInventory);
+                this.RemoveChild(oldPanel);
+                testPanels.AdjustButtonLocations();
             }
             base.Update(gameTime);
         }
 
         /// <summary>
-        /// Creates all test panels and adds them to the list for debugging.
+        /// Registers the element so it will be evaluated when the player enters a world to determine if elements need to be removed or added to it according to the availability of items.
         /// </summary>
-        public void CreateAllTestPanels()
+        /// <param name="element">The element to register.</param>
+        public void RegisterUIElementForWorldUpdate(IUpdateElementsOnWorldEntry element)
         {
-            testPanels = new List<UIPanel>();
-
-            // panel to test the item sprites
-            UIPanel testItemSpritePanel = CreateTestItemSpritePanel();
-            testItemSpritePanel.Left = StyleDimension.FromPixels(5);
-            testItemSpritePanel.VAlign = 0.5f;
-            //testPanels.Add(testItemSpritePanel);
-
-            // panel to test grid and sorting of elements
-            UIPanel testGridSortPanel = CreateGridTestPanel();
-            testGridSortPanel.Left = StyleDimension.FromPixels(testItemSpritePanel.Left.Pixels + testItemSpritePanel.Width.Pixels + 15);
-            testGridSortPanel.VAlign = 0.5f;
-            //testPanels.Add(testGridSortPanel);
-
-            // panel to test custom grid
-            UIPanel testCustomGridPanel = CreateCustomGridTestPanel();
-            testCustomGridPanel.Left = StyleDimension.FromPixels(testGridSortPanel.Left.Pixels + testGridSortPanel.Width.Pixels + 15);
-            testCustomGridPanel.VAlign = 0.5f;
-            //testPanels.Add(testCustomGridPanel);
-
-            // panel to test resizing UISingleRow
-            UIPanel testUISingleRowPanel = CreateUISingleRowTestPanel();
-            testUISingleRowPanel.Left.Set(testItemSpritePanel.Left.Pixels + testItemSpritePanel.Width.Pixels + 15, 0f);
-            testUISingleRowPanel.VAlign = 0.5f;
-            //testPanels.Add(testUISingleRowPanel);
-
-            // panel to test sorting of UISingleRow
-            UIPanel testUISingleRowSort = CreateUISingleRowSortTestPanel();
-            testUISingleRowSort.HAlign = 0.5f;
-            testUISingleRowSort.VAlign = 0.5f;
-            //testPanels.Add(testUISingleRowSort);
-
-            // panel to test implementation of UIList
-            UIPanel testSubrowList2 = CreateSubrowResizeTestPanel();
-            testSubrowList2.VAlign = 0.3f;
-            testSubrowList2.Left.Set(20f, 0f);
-            testPanels.Add(testSubrowList2);
-
-
+            updateOnWorldEnter.Add(element);
         }
-
-        /// <summary>
-        /// Create a panel for testing each of the derived classes of BuffItemUIIcons
-        /// </summary>
-        /// <returns>A panel with each BuffItemUIIcons placed in it to be used to debug.</returns>
-        public UIPanel CreateTestItemSpritePanel()
-        {
-            UIPanel panel = new UIPanel();
-            panel.Width = StyleDimension.FromPixels(300);
-            panel.Height = StyleDimension.FromPixels(300);
-            
-            //panel.HAlign = 0.5f;
-            //panel.VAlign = 0.5f;
-
-            UIText headerText = new UIText("Item Sprite Test");
-            headerText.HAlign = 0.5f;
-            panel.Append(headerText);
-
-            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
-
-            // place each element in the panel
-            int rowCount = 0;
-            int columnCount = 0;
-            BuffItemUIElement prevElement = null;
-            foreach (var key in elements.Keys)
-            {
-                BuffItemUIElement element = elements[key];
-                if (prevElement == null)
-                {
-                    // place first element
-                    element.Left = StyleDimension.FromPixels(0);
-                    element.Top = StyleDimension.FromPixels(30);
-                    columnCount++;
-                    panel.Append(element);
-                    prevElement = element;
-                    continue;
-                }
-                if (columnCount == 0) element.Left = StyleDimension.FromPixels(0);
-                else element.Left = StyleDimension.FromPixels(prevElement.Left.Pixels + 40);
-                if (rowCount == 0) element.Top = StyleDimension.FromPixels(30);
-                else element.Top = StyleDimension.FromPixels((rowCount * 40) + 30);
-
-                panel.Append(element);
-                prevElement = element;
-                // increment counters
-                if (columnCount + 1 < 5) columnCount++;
-                else
-                {
-                    columnCount = 0;
-                    rowCount++;
-                }
-            }
-            return panel;
-        }
-
-        /// <summary>
-        /// Create a panel for testing the default UIGrid and the sorting of the BuffItemUIIcons.
-        /// </summary>
-        /// <returns>A panel with all the BuffItemUIIcons in a grid as well as noting the order they were added.</returns>
-        public UIPanel CreateGridTestPanel()
-        {
-            var panel = new UIPanel();
-            panel.Width = StyleDimension.FromPixels(300);
-            panel.Height = StyleDimension.FromPixels(625);
-
-            UIText headerLabel = new UIText("Grid and Sorting Test");
-            headerLabel.HAlign = 0.5f;
-            panel.Append(headerLabel);
-            
-            UIGrid grid = new UIGrid();
-            grid.Width = StyleDimension.Fill;
-            grid.Height = StyleDimension.FromPixels(105);
-            grid.Top = StyleDimension.FromPixels(25);
-            panel.Append(grid);
-
-            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
-            List<string> orderAdded = new List<string>();
-            // add the elements in reverse order
-            foreach (var key in elements.Keys.Reverse())
-            {
-                orderAdded.Add(key);
-                grid.Add(elements[key]);
-            }
-            UIText orderAddedText = new UIText("Order Added:\n" + String.Join("\n", orderAdded));
-            orderAddedText.Top = StyleDimension.FromPixels(grid.Top.Pixels + grid.Height.Pixels + 10);
-            panel.Append(orderAddedText);
-
-            return panel;
-        }
-
-        /// <summary>
-        /// Create a panel for testing BuffItemUIGrid.
-        /// </summary>
-        /// <returns></returns>
-        public UIPanel CreateCustomGridTestPanel()
-        {
-            var panel = new UIPanel();
-            panel.Width = StyleDimension.FromPixels(300);
-            panel.Height = StyleDimension.FromPixels(300);
-
-            UIText headerLabel = new UIText("Custom Grid Test");
-            headerLabel.HAlign = 0.5f;
-            panel.Append(headerLabel);
-
-            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
-            BuffItemUIGrid grid = new BuffItemUIGrid();
-            grid.Top = StyleDimension.FromPixels(25);
-            grid.Width = StyleDimension.Fill;
-            grid.Height = StyleDimension.Fill;
-            panel.Append(grid);
-
-            foreach (var key in elements.Keys)
-            {
-                grid.Add(elements[key]);
-            }
-            grid.RegisterWorldCheckElement(elements["demonHeart"]);
-            grid.RegisterWorldCheckElement(elements["minecartUpgrade"]);
-            // register this grid so it gets updated when the player enters the world
-            updateOnWorldEnter.Add(grid);
-            return panel;
-        }
-
-        /// <summary>
-        /// Creates a panel for testing the resizing of UISingleRow
-        /// </summary>
-        /// <returns></returns>
-        public UIPanel CreateUISingleRowTestPanel()
-        {
-            var panel = new UIPanel();
-            panel.Width = StyleDimension.FromPixels(300);
-            panel.Height = StyleDimension.FromPixels(300);
-
-            UIText headerLabel = new UIText("UISingleRow Test");
-            headerLabel.HAlign = 0.5f;
-            panel.Append(headerLabel);
-            
-            UISubrow row = new UISubrow();
-            row.Top.Set(25f, 0f);
-            row.Width.Set(80f, 0f);
-            row.Height.Set(40f, 0f);
-            panel.Append(row);
-
-            UIText rowExpectedWidthText = new UIText($"Row expected width: {row.ExpectedWidth}");
-            rowExpectedWidthText.Top.Set(60f, 0f);
-            panel.Append(rowExpectedWidthText);
-
-            UIText rowExpectedHeightText = new UIText($"Row excpected height: {row.ExpectedHeight}");
-            rowExpectedHeightText.Top.Set(90f, 0f);
-            panel.Append(rowExpectedHeightText);
-
-            UIText rowWidthText = new UIText($"Row width: {row.Width.Pixels}");
-            rowWidthText.Top.Set(120f, 0f);
-            panel.Append(rowWidthText);
-
-            UIText rowHeightText = new UIText($"Row height: {row.Height.Pixels}");
-            rowHeightText.Top.Set(150f, 0f);
-            panel.Append(rowHeightText);
-
-            UIImageButton button = new UIImageButton(Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", mode: ReLogic.Content.AssetRequestMode.ImmediateLoad));
-            button.Top.Set(180f, 0f);
-            button.OnLeftClick += delegate
-            {
-                MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
-                item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
-                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
-                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
-                row.Add(lifeCrystal);
-                
-                rowExpectedWidthText.SetText($"Row expected width: {row.ExpectedWidth}");
-                rowExpectedHeightText.SetText($"Row excpected height: {row.ExpectedHeight}");
-                rowWidthText.SetText($"Row width: {row.Width.Pixels}");
-                rowHeightText.SetText($"Row height: {row.Height.Pixels}");
-            };
-            panel.Append(button);
-
-            return panel;
-        }
-
-        /// <summary>
-        /// Creates a panel to test the sorting of UISingleRow
-        /// </summary>
-        /// <returns></returns>
-        public UIPanel CreateUISingleRowSortTestPanel()
-        {
-            var panel = new UIPanel();
-            panel.Width.Set(630f, 0f);
-            panel.Height.Set(600f, 0f);
-
-            var headerText = new UIText("Test Sorting UISingleRow");
-            headerText.HAlign = 0.5f;
-            panel.Append(headerText);
-
-            var row = new UISubrow();
-            row.Width.Set(590f, 0f);
-            row.Height.Set(40f, 0f);
-            row.Top.Set(25f, 0f);
-            panel.Append(row);
-
-            Dictionary<string, BuffItemUIElement> elements = CreateBuffItemIcons();
-            List<string> reverseKeys = elements.Keys.Reverse().ToList();
-
-            foreach (var key in reverseKeys) row.Add(elements[key]);
-            var orderAddedText = new UIText("Order Added:\n" + String.Join("\n", reverseKeys));
-            orderAddedText.Top = StyleDimension.FromPixels(row.Top.Pixels + row.Height.Pixels + 10);
-            panel.Append(orderAddedText);
-
-            // place so item gets updated on world enter
-            updateOnWorldEnter.Add(row);
-
-            return panel;
-        }
-
-        public UIPanel CreateSubrowResizeTestPanel()
-        {
-            var panel = new UIPanel();
-            panel.Width.Set(300f, 0f);
-            panel.Height.Set(500f, 0f);
-
-            var headerText = new UIText("Subrow2 test");
-            headerText.HAlign = 0.5f;
-            panel.Append(headerText);
-            var subrowList = new UISubrowList();
-            subrowList.Top.Set(30f, 0f);
-            subrowList.Width.Set(80f, 0f);
-            subrowList.Height.Set(120f, 0f);
-            panel.Append(subrowList);
-
-            UIText expectedHeightText = new UIText($"Expected height: {subrowList.ExpectedHeight}");
-            expectedHeightText.Top.Set(300f, 0f);
-            panel.Append(expectedHeightText);
-            UIText expectedWidthText = new UIText($"Expected width: {subrowList.ExpectedWidth}");
-            expectedWidthText.Top.Set(340f, 0f);
-            panel.Append(expectedWidthText);
-            UIText actualHeightText = new UIText($"Actual height: {subrowList.Height.Pixels}");
-            actualHeightText.Top.Set(380f, 0f);
-            panel.Append(actualHeightText);
-            UIText actualWidthText = new UIText($"Actual width: {subrowList.Width.Pixels}");
-            actualWidthText.Top.Set(420f, 0f);
-            panel.Append(actualWidthText);
-
-            var addElementButton = new UIImageButton(
-                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", 
-                mode: ReLogic.Content.AssetRequestMode.ImmediateLoad));
-            addElementButton.Top.Set(200f, 0f);
-            addElementButton.OnLeftClick += delegate
-            {
-                MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
-                item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
-                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
-                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
-                int index = subrowList.Count - 1;
-                subrowList.AddElementToSubrow(index, lifeCrystal);
-                //subrowList2.AdjustSize();
-                expectedHeightText.SetText($"Expected height: {subrowList.ExpectedHeight}");
-                expectedWidthText.SetText($"Expected width: {subrowList.ExpectedWidth}");
-                actualHeightText.SetText($"Actual height: {subrowList.Height.Pixels}");
-                actualWidthText.SetText($"Actual width: {subrowList.Width.Pixels}");
-            };
-            panel.Append(addElementButton);
-
-            var addRowButton = new UIImageButton(
-                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", 
-                mode: ReLogic.Content.AssetRequestMode.ImmediateLoad));
-            addRowButton.Top.Set(240f, 0f);
-            addRowButton.OnLeftClick += delegate
-            {
-                subrowList.CreateNewSubrow();
-                //subrowList2.AdjustSize();
-                expectedHeightText.SetText($"Expected height: {subrowList.ExpectedHeight}");
-                expectedWidthText.SetText($"Expected width: {subrowList.ExpectedWidth}");
-                actualHeightText.SetText($"Actual height: {subrowList.Height.Pixels}");
-                actualWidthText.SetText($"Actual width: {subrowList.Width.Pixels}");
-            };
-            panel.Append(addRowButton);
-
-            UIText addElementText = new UIText("Add element");
-            addElementText.Top.Set(addElementButton.Top.Pixels, 0f);
-            addElementText.Left.Set(40f, 0f);
-            panel.Append(addElementButton);
-
-            UIText addRowText = new UIText("Add row");
-            addRowText.Top.Set(addRowButton.Top.Pixels, 0f);
-            addRowText.Left.Set(40f, 0f);
-            panel.Append(addElementButton);
-
-
-
-            return panel;
-        }
-
 
         /// <summary>
         /// To be called when a player enters a world. Has registered elements determine if children need to be added/removed based on the world.
@@ -388,14 +63,21 @@ namespace PermanentBuffViewer
         {
             foreach (var element in updateOnWorldEnter)
             {
-                if (element is BuffItemUIGrid)
+                /*if (element is BuffItemUIGrid)
                 {
                     ((BuffItemUIGrid)element).UpdateGridUIElementsOnWorldEnter();
-                }
-                if (element is IUpdateElementsOnWorldEntry row) row.UpdateElementsOnWorldEntry();
+                }*/
+                //if (element is IUpdateElementsOnWorldEntry row) row.UpdateElementsOnWorldEntry();
+                element.UpdateElementsOnWorldEntry();
             }
         }
 
+        /// <summary>
+        /// Creates BuffItemUIElements for the 16 vanilla terraria buff items.<br/>
+        /// The key for an element is a string of the name of the variable associated with that item.<br/>
+        /// ex) "lifeCrystal" = Life Crystal icon, "aegisCrystal" = Vital Crystal icon.
+        /// </summary>
+        /// <returns>A dictionary containing all 16 BuffItemUIElements.</returns>
         public Dictionary<string, BuffItemUIElement> CreateBuffItemIcons()
         {
             Dictionary<string, BuffItemUIElement> elements = new Dictionary<string, BuffItemUIElement>();
