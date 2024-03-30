@@ -72,6 +72,7 @@ namespace PermanentBuffViewer.UI
         { 
             items.Add(item);
             base.Append(item);
+            Recalculate();
             return Count - 1;
         }
 
@@ -79,18 +80,21 @@ namespace PermanentBuffViewer.UI
         {
             UISubrow subrow = new UISubrow();
             SetSubrowDefaults(subrow);
+            Recalculate();
             return AddSubrow(subrow);
         }
 
         public void AddElementToSubrow(int subrowIndex, BuffItemUIElement element)
         {
             GetSubrow(subrowIndex).Add(element);
+            Recalculate();
         }
 
         public void AddAllElementsToSubrow(int subrowIndex, IEnumerable<BuffItemUIElement> elements)
         {
             UISubrow subrow = GetSubrow(subrowIndex);
             foreach (BuffItemUIElement element in elements) subrow.Add(element);
+            Recalculate();
         }
 
         public bool Remove(UISubrow item) 
