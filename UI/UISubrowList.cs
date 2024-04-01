@@ -43,7 +43,12 @@ namespace PermanentBuffViewer.UI
             }
         }
 
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="numSubrows">The number of subrows to create this list with.<br/>
+        /// Must be one or greater.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if numSubrows is less than 1.</exception>
         public UISubrowList(int numSubrows = 1) 
         { 
             if (numSubrows < 1) throw new ArgumentOutOfRangeException(nameof(numSubrows),
@@ -56,26 +61,45 @@ namespace PermanentBuffViewer.UI
             }
         }
 
+        /// <summary>
+        /// Gets the subrow from a given index.
+        /// </summary>
+        /// <param name="index">The index of subrow to get.</param>
+        /// <returns>The subrow for the given index.</returns>
         public UISubrow GetSubrow(int index)
         {
             return items[index];
         }
 
+        /// <summary>
+        /// Sets the default height and width of a subrow.<br/>
+        /// Height = subrow.defaultHeight<br/>
+        /// Width = StyleDimension.Fill
+        /// </summary>
+        /// <param name="subrow">The subrow to set the defaults of.</param>
         public void SetSubrowDefaults(UISubrow subrow)
         {
             subrow.Height.Set(subrow.defaultHeight, 0f);
             subrow.Width = StyleDimension.Fill;
         }
 
-        // returns the index of the new item
-        public int AddSubrow(UISubrow item) 
+        /// <summary>
+        /// Adds a subrow to the list. Returns the index of the new subrow.
+        /// </summary>
+        /// <param name="subrow">The subrow to add to the list.</param>
+        /// <returns>The index of the new subrow.</returns>
+        public int AddSubrow(UISubrow subrow) 
         { 
-            items.Add(item);
-            base.Append(item);
+            items.Add(subrow);
+            base.Append(subrow);
             Recalculate();
             return Count - 1;
         }
 
+        /// <summary>
+        /// Creates a new, empty subrow and adds it to the list.
+        /// </summary>
+        /// <returns>The index of the newly created subrow.</returns>
         public int CreateNewSubrow()
         {
             UISubrow subrow = new UISubrow();
@@ -84,12 +108,22 @@ namespace PermanentBuffViewer.UI
             return AddSubrow(subrow);
         }
 
+        /// <summary>
+        /// Adds a BuffItemUIElement to a subrow chosen by index.
+        /// </summary>
+        /// <param name="subrowIndex">The index of the subrow to add element to.</param>
+        /// <param name="element">The BuffItemUIElement to add to the subrow.</param>
         public void AddElementToSubrow(int subrowIndex, BuffItemUIElement element)
         {
             GetSubrow(subrowIndex).Add(element);
             Recalculate();
         }
 
+        /// <summary>
+        /// Adds all BuffItemUIElements to the subrow indicated by index.
+        /// </summary>
+        /// <param name="subrowIndex">The index of the subrow to add elements to.</param>
+        /// <param name="elements">The elements that will be added to the subrow.</param>
         public void AddAllElementsToSubrow(int subrowIndex, IEnumerable<BuffItemUIElement> elements)
         {
             UISubrow subrow = GetSubrow(subrowIndex);
@@ -97,12 +131,20 @@ namespace PermanentBuffViewer.UI
             Recalculate();
         }
 
+        /// <summary>
+        /// Removes the first instance of the chosen subrow from the list.
+        /// </summary>
+        /// <param name="item">The item to remove.</param>
+        /// <returns>True if the item was removed, false if it wasn't removed or could not be found.</returns>
         public bool Remove(UISubrow item) 
         {
             base.RemoveChild(item);
             return items.Remove(item);
         }
 
+        /// <summary>
+        /// Removes all children from the list.
+        /// </summary>
         public void Clear()
         {
             base.RemoveAllChildren();
