@@ -32,7 +32,7 @@ namespace PermanentBuffViewer.UI
         public override string CreateHoverText()
         {
             return usedItem.IsMet() ?
-                itemUsedHoverText.Format(item.Name, statModified.Value) :
+                itemUsedHoverText.Format(Item.Name, statModified.Value) :
                 itemNotUsedHoverText.Format(howToObtainText.Value);
         }
     }

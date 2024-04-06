@@ -26,6 +26,7 @@ namespace PermanentBuffViewer
         public static Condition UsedCombatBookVolumeTwo = new Condition("Mods.PermanentBuffViewer.Conditions.UsedCombatBookVolumeTwo", () => NPC.combatBookVolumeTwoWasUsed);
         public static Condition UsedPeddlersSatchel = new Condition("Mods.PermanentBuffViewer.Conditions.UsedPeddlersSatchel", () => NPC.peddlersSatchelWasUsed);
 
+        public static Condition DebugAlwaysTrue = new Condition("Mods.PermanentBuffViewer.Conditions.DebugAlwaysTrue", () => true);
 
     }
 }

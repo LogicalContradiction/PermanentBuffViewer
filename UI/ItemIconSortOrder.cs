@@ -58,8 +58,8 @@ namespace PermanentBuffViewer.UI
         /// </returns>
         public int Compare(BuffItemUIElement item1, BuffItemUIElement item2)
         {
-            int item1Position = lookup[item1.item.type];
-            int item2Position = lookup[item2.item.type];
+            int item1Position = lookup[item1.Item.type];
+            int item2Position = lookup[item2.Item.type];
 
             if (item1Position < item2Position) return -1;
             if (item1Position > item2Position) return 1;

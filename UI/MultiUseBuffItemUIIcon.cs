@@ -35,8 +35,8 @@ namespace PermanentBuffViewer.UI
         public override string CreateHoverText()
         {
             return usedItem.IsMet() ?
-                itemUsedHoverText.Format(item.Name, 
-                Main.LocalPlayer.GetModPlayer<BuffViewerPlayer>().GetNumOfPermanentItemUsed(item.type),
+                itemUsedHoverText.Format(Item.Name, 
+                Main.LocalPlayer.GetModPlayer<BuffViewerPlayer>().GetNumOfPermanentItemUsed(Item.type),
                 maxNumCanUse, statModified.Value) : 
                 itemNotUsedHoverText.Format(howToObtainText.Value);
         }

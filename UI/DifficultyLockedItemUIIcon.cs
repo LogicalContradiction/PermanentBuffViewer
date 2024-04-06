@@ -62,7 +62,7 @@ namespace PermanentBuffViewer.UI
                     ModContent.GetInstance<PermanentBuffViewer>().Logger.Error(
                         "GetDrawColor() for difficulty locked UI Icon was called in a world where " +
                         "the icon should not be drawn. The following item should not have been added to the " +
-                        $"rendered UI: {item.Name}");
+                        $"rendered UI: {Item.Name}");
                     return Color.Black;
                 }
                 // Item has been used but isn't available in current world.
@@ -84,14 +84,14 @@ namespace PermanentBuffViewer.UI
                     ModContent.GetInstance<PermanentBuffViewer>().Logger.Error(
                         "CreateHoverText() for difficulty locked UI Icon was called in a world where " +
                         "the icon should not be drawn. The following item should not have been added to the " +
-                        $"rendered UI: {item.Name}");
+                        $"rendered UI: {Item.Name}");
                     return itemNotUsedHoverText.Format();
                 }
                 // Item has been used but is not available in current world.
                 return itemNotAvailableInCurrentDifficulty.Value;
             }
             // Item was used and is available in this world.
-            if (usedItem.IsMet()) return itemUsedHoverText.Format(item.Name, statModified.Value);
+            if (usedItem.IsMet()) return itemUsedHoverText.Format(Item.Name, statModified.Value);
             // Item wasn't used but is available.
             return itemNotUsedHoverText.Format(howToObtainText.Value);
         }

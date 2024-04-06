@@ -220,12 +220,13 @@ namespace PermanentBuffViewer
             grid.Top = StyleDimension.FromPixels(25);
             panel.Append(grid);
 
-            Dictionary<string, BuffItemUIElement> elements = GetBuffItemIcons();
+            Dictionary<int, BuffItemUIElement> elements = 
+                BuffItemUIElement.CreateVanillaBuffItemIcons();
             List<string> orderAdded = new List<string>();
             // add the elements in reverse order
             foreach (var key in elements.Keys.Reverse())
             {
-                orderAdded.Add(key);
+                orderAdded.Add(elements[key].Item.Name);
                 grid.Add(elements[key]);
             }
             UIText orderAddedText = new UIText("Order Added:\n" + String.Join("\n", orderAdded));
@@ -275,13 +276,8 @@ namespace PermanentBuffViewer
             button.Top.Set(180f, 0f);
             button.OnLeftClick += delegate
             {
-                MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
-                item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
-                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
-                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
-                row.Add(lifeCrystal);
+                BuffItemUIElement lifeCrystal =
+                BuffItemUIElement.CreateSingleElement(ItemID.LifeCrystal);
 
                 rowExpectedWidthText.SetText($"Row expected width: {row.ExpectedWidth}");
                 rowExpectedHeightText.SetText($"Row excpected height: {row.ExpectedHeight}");
