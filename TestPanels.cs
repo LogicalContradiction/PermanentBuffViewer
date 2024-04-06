@@ -163,7 +163,8 @@ namespace PermanentBuffViewer
             headerText.HAlign = 0.5f;
             panel.Append(headerText);
 
-            Dictionary<string, BuffItemUIElement> elements = GetBuffItemIcons();
+            Dictionary<int, BuffItemUIElement> elements = 
+                BuffItemUIElement.CreateVanillaBuffItemIcons();
 
             // place each element in the panel
             int rowCount = 0;
@@ -278,6 +279,7 @@ namespace PermanentBuffViewer
             {
                 BuffItemUIElement lifeCrystal =
                 BuffItemUIElement.CreateSingleElement(ItemID.LifeCrystal);
+                row.Add(lifeCrystal);
 
                 rowExpectedWidthText.SetText($"Row expected width: {row.ExpectedWidth}");
                 rowExpectedHeightText.SetText($"Row excpected height: {row.ExpectedHeight}");
@@ -309,11 +311,18 @@ namespace PermanentBuffViewer
             row.Top.Set(25f, 0f);
             panel.Append(row);
 
-            Dictionary<string, BuffItemUIElement> elements = GetBuffItemIcons();
-            List<string> reverseKeys = elements.Keys.Reverse().ToList();
+            Dictionary<int, BuffItemUIElement> elements = 
+                BuffItemUIElement.CreateVanillaBuffItemIcons();
+            List<int> reverseKeys = elements.Keys.Reverse().ToList();
+            List<string> orderAdded = new List<string>();
 
-            foreach (var key in reverseKeys) row.Add(elements[key]);
-            var orderAddedText = new UIText("Order Added:\n" + String.Join("\n", reverseKeys));
+            foreach (var key in reverseKeys)
+            {
+                BuffItemUIElement element = elements[key];
+                row.Add(element);
+                orderAdded.Add(element.Item.Name);
+            }
+            var orderAddedText = new UIText("Order Added:\n" + String.Join("\n", orderAdded));
             orderAddedText.Top = StyleDimension.FromPixels(row.Top.Pixels + row.Height.Pixels + 10);
             panel.Append(orderAddedText);
 
@@ -401,17 +410,6 @@ namespace PermanentBuffViewer
             panel.Append(addRowText);
 
             return panel;
-        }
-
-
-        /// <summary>
-        /// Creates one BuffItemUIElement for each vanilla buff item.<br/>
-        /// The key for a particular item is the internal name.
-        /// </summary>
-        /// <returns>A dictionary containing one BuffItemUIElement per vanilla buff.</returns>
-        public Dictionary<string, BuffItemUIElement> GetBuffItemIcons()
-        {
-            return buffViewerUIState.CreateBuffItemIcons();
         }
 
 
