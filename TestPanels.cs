@@ -147,6 +147,12 @@ namespace PermanentBuffViewer
             testUISubrowListResizePanel.HAlign = 0.5f;
             testUISubrowListResizePanel.VAlign = 0.5f;
             testPanels.Add(testUISubrowListResizePanel);
+
+            // Tests the various functions of UIRow
+            UIPanel testUIRowPanel = CreateUIRowTestPanel();
+            testUIRowPanel.HAlign = 0.5f;
+            testUIRowPanel.VAlign = 0.5f;
+            testPanels.Add(testUIRowPanel);
         }
 
         /// <summary>
@@ -208,7 +214,7 @@ namespace PermanentBuffViewer
         public UIPanel CreateGridTestPanel()
         {
             var panel = new UIPanel();
-            panel.Width = StyleDimension.FromPixels(300);
+            panel.Width = StyleDimension.FromPixels(375);
             panel.Height = StyleDimension.FromPixels(625);
 
             UIText headerLabel = new UIText("Grid and Sorting Test");
@@ -370,12 +376,7 @@ namespace PermanentBuffViewer
             addElementButton.Top.Set(400f, 0f);
             addElementButton.OnLeftClick += delegate
             {
-                MultiUseBuffItemUIIcon lifeCrystal = new MultiUseBuffItemUIIcon(
-                item: new Item(ItemID.LifeCrystal), usedItem: BuffViewerCondition.UsedLifeCrystal, maxNumCanUse: 15,
-                itemUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.MultiUsed",
-                itemNotUsedHoverTextKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.NotUsed",
-                howToObtainKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.HowToObtain.LifeCrystal",
-                statModifiedKey: "Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.ModifiedStats.LifeCrystal");
+                BuffItemUIElement lifeCrystal = BuffItemUIElement.CreateSingleElement(ItemID.LifeCrystal);
                 int index = subrowList.Count - 1;
                 subrowList.AddElementToSubrow(index, lifeCrystal);
                 expectedHeightText.SetText($"Expected height: {subrowList.ExpectedHeight}");
@@ -412,7 +413,79 @@ namespace PermanentBuffViewer
             return panel;
         }
 
+        public UIPanel CreateUIRowTestPanel()
+        {
+            var panel = new UIPanel();
 
+            // Used since innerDimensions of panel wasn't working when I tried
+            var panelWidth = 300f;
+            // Used to correct the width of the rows
+            var panelMargin = 12f;
+            // This is the width of a row after subtracting the margins
+            var adjustedRowWidth = panelWidth - (2 * panelMargin);
+            panel.Width.Set(panelWidth, 0f);
+            panel.Height.Set(600f, 0f);
+
+            var headerText = new UIText("UIRow tests");
+            panel.HAlign = 0.5f;
+            panel.Append(headerText);
+            // panels have a 12f margin on all sides
+            // remember to subtract 24f from the width of the rows if row width == panel width
+
+            var constructorDefaultText = new UIText("Default constructor");
+            constructorDefaultText.Top.Set(50f, 0f);
+            panel.Append(constructorDefaultText);
+
+            var constructorDefaultRow = new UIRow("Mods.PermanentBuffViewer.DefaultText");
+            constructorDefaultRow.Top.Set(60f, 0f);
+            constructorDefaultRow.Height.Set(50f, 0f);
+            constructorDefaultRow.Width.Set(adjustedRowWidth, 0f);
+            for (int i = 0; i < 3; i++) constructorDefaultRow.AddElementToSubrow(
+                0, BuffItemUIElement.CreateSingleElement(ItemID.LifeCrystal));
+            panel.Append(constructorDefaultRow);
+
+
+            var twoRowDefaultConstructorText = new UIText("Default constructor w/ >1 row");
+            twoRowDefaultConstructorText.Top.Set(110f, 0f);
+            panel.Append(twoRowDefaultConstructorText);
+
+            var twoRowDefaultConstructorRow = new UIRow(
+                "Mods.PermanentBuffViewer.DefaultText", numSubrows: 2);
+            twoRowDefaultConstructorRow.Top.Set(120f, 0f);
+            twoRowDefaultConstructorRow.Height.Set(100f, 0f);
+            twoRowDefaultConstructorRow.Width.Set(adjustedRowWidth, 0f);
+            // adding elements with a single call doesn't work
+            // adding elements with >1 call works fine
+
+            // Add 3 elements to the first subrow
+            twoRowDefaultConstructorRow.AddElementToSubrow(
+                0, BuffItemUIElement.CreateSingleElement(ItemID.LifeCrystal));
+            //twoRowDefaultConstructorRow.AddAllElementsToSubrow(
+            //    0, BuffItemUIElement.CreateMultipleElements(ItemID.LifeCrystal, 3));
+            
+            // Add 1 element to the second subrow
+            //twoRowDefaultConstructorRow.AddElementToSubrow(
+            //    1, BuffItemUIElement.CreateSingleElement(ItemID.LifeCrystal));
+            panel.Append(twoRowDefaultConstructorRow);
+
+
+
+            // test constructor with > 1 subrow
+            // test create new subrow
+            // test add subrow
+            // test adding element to subrow
+            // test addingAll elements to subrow
+            // test changing left text
+            // test elements changing on world entry
+
+
+
+
+
+            // look at previous objects made and move adjustSize calls to whenever a new item's added
+            // look also at calls to recalculate and consider if something similar needs to be done
+            return panel;
+        }
 
 
 

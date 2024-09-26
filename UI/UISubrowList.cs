@@ -116,6 +116,7 @@ namespace PermanentBuffViewer.UI
         public void AddElementToSubrow(int subrowIndex, BuffItemUIElement element)
         {
             GetSubrow(subrowIndex).Add(element);
+            AdjustSize();
             Recalculate();
         }
 
@@ -128,6 +129,7 @@ namespace PermanentBuffViewer.UI
         {
             UISubrow subrow = GetSubrow(subrowIndex);
             foreach (BuffItemUIElement element in elements) subrow.Add(element);
+            AdjustSize();
             Recalculate();
         }
 

@@ -17,7 +17,7 @@ Conditions: {
 	DebugAlwaysTrue: Mods.PermanentBuffViewer.Conditions.DebugAlwaysTrue
 }
 
-DefaultText: Mods.PermanentBuffViewer.DefaultText
+DefaultText: Default Text:
 
 UI: {
 	ItemIcon: {

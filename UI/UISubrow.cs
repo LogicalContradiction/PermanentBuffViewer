@@ -58,6 +58,7 @@ namespace PermanentBuffViewer.UI
             if (item is DifficultyLockedItemUIIcon && registerIfNeeded) updateOnWorldEntry.Add(item);
             Append(item);
             UpdateOrder();
+            AdjustSize();
             Recalculate();
         }
 
