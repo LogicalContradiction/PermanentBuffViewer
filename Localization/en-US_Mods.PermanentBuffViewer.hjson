@@ -86,6 +86,7 @@ UI: {
 				This item is only available in Expert mode or higher
 				It has been used, but grants you no bonus in this world
 				'''
+			Error: This item should not have been drawn. Please see the log file for more info.
 		}
 	}
 }

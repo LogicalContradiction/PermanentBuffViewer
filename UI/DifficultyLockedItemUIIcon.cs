@@ -20,6 +20,13 @@ namespace PermanentBuffViewer.UI
         private LocalizedText itemNotAvailableInCurrentDifficulty;
         private Color transparent = new Color(r:0xFF, g:0xFF, b:0xFF, alpha:0.3f);
 
+        // Bools to write errors to log file once and not spam them.
+        private bool recordDrawColorError = false;
+        private bool recordHoverTextError = false;
+
+        // Stores the text shown on hover when an item is drawn in a difficulty it should not be drawn in.
+        private LocalizedText hoverTextError;
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -41,6 +48,7 @@ namespace PermanentBuffViewer.UI
             this.minDifficultyAvailable = availableDifficulties;
             this.itemNotAvailableInCurrentDifficulty = 
                 Language.GetOrRegister(itemNotAvailableInCurrentDifficulty);
+            this.hoverTextError = Language.GetOrRegister("Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.Error");
         }
 
         public override bool ShouldBeAddedToRendering()
@@ -59,10 +67,14 @@ namespace PermanentBuffViewer.UI
                 if (!usedItem.IsMet())
                 {
                     // Item is not available and hasn't been used. Should never be reached.
-                    ModContent.GetInstance<PermanentBuffViewer>().Logger.Error(
-                        "GetDrawColor() for difficulty locked UI Icon was called in a world where " +
-                        "the icon should not be drawn. The following item should not have been added to the " +
-                        $"rendered UI: {Item.Name}");
+                    if (!recordDrawColorError) 
+                    {
+                        ModContent.GetInstance<PermanentBuffViewer>().Logger.Error(
+                            "GetDrawColor() for difficulty locked UI Icon was called in a world where " +
+                            "the icon should not be drawn. The following item should not have been added to the " +
+                            $"rendered UI: {Item.Name}");
+                        recordDrawColorError = true;
+                    } 
                     return Color.Black;
                 }
                 // Item has been used but isn't available in current world.
@@ -81,11 +93,15 @@ namespace PermanentBuffViewer.UI
                 if (!usedItem.IsMet())
                 {
                     // Item is not available and hasn't been used. Should never be reached.
-                    ModContent.GetInstance<PermanentBuffViewer>().Logger.Error(
-                        "CreateHoverText() for difficulty locked UI Icon was called in a world where " +
-                        "the icon should not be drawn. The following item should not have been added to the " +
-                        $"rendered UI: {Item.Name}");
-                    return itemNotUsedHoverText.Format();
+                    if (!recordHoverTextError)
+                    {
+                        ModContent.GetInstance<PermanentBuffViewer>().Logger.Error(
+                            "CreateHoverText() for difficulty locked UI Icon was called in a world where " +
+                            "the icon should not be drawn. The following item should not have been added to the " +
+                            $"rendered UI: {Item.Name}");
+                        recordHoverTextError = true;
+                    }
+                    return hoverTextError.Format();
                 }
                 // Item has been used but is not available in current world.
                 return itemNotAvailableInCurrentDifficulty.Value;
