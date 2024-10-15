@@ -10,7 +10,7 @@ namespace PermanentBuffViewer.UI
     /// <summary>
     /// Holds the display ordering of items for use in comparisons by UI elements in a grid.
     /// </summary>
-    internal class ItemIconSortOrder
+    internal class ItemIconComparer: IComparer<BuffItemUIElement>
     {
         private List<int> order = new List<int>()
         {
@@ -28,7 +28,7 @@ namespace PermanentBuffViewer.UI
 
         private Dictionary<int, int> lookup;
 
-        public ItemIconSortOrder() 
+        public ItemIconComparer() 
         {
             BuildLookup();   
         }
