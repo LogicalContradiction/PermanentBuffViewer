@@ -28,7 +28,7 @@ namespace PermanentBuffViewer.UI
         internal LocalizedText howToObtainText;
         internal LocalizedText statModified;
 
-        internal static ItemIconSortOrder sortOrder;
+        internal static ItemIconComparer sortOrder;
 
         /// <summary>
         /// Constructor
@@ -51,7 +51,7 @@ namespace PermanentBuffViewer.UI
             this.statModified = Language.GetOrRegister(statModifiedKey);
             base.Width.Set(32f, 0f);
             base.Height.Set(32f, 0f);
-            if (sortOrder == null) sortOrder = new ItemIconSortOrder();
+            if (sortOrder == null) sortOrder = new ItemIconComparer();
         }
 
         /// <summary>
@@ -120,6 +120,7 @@ namespace PermanentBuffViewer.UI
             }
         }
 
+        // May not need, just use comparer
         public override int CompareTo(object obj)
         {
             if (obj is BuffItemUIElement) return sortOrder.Compare(this, (BuffItemUIElement)obj);
