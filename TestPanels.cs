@@ -127,6 +127,11 @@ namespace PermanentBuffViewer
             testItemSpritePanel.HAlign = 0.5f;
             testItemSpritePanel.VAlign = 0.5f;
             testPanels.Add(testItemSpritePanel);
+
+            UIPanel testUISingleRowPanel = CreateUISingleRowTestPanel();
+            testUISingleRowPanel.HAlign = 0.5f;
+            testUISingleRowPanel.VAlign = 0.5f;
+            testPanels.Add(testUISingleRowPanel);
         }
 
         /// <summary>
@@ -178,6 +183,42 @@ namespace PermanentBuffViewer
                     rowCount++;
                 }
             }
+            return panel;
+        }
+
+        /// <summary>
+        /// Create a panel for testing the drawing and sorting of UISingleRow.
+        /// </summary>
+        /// <returns>A panel to test the drawing and sorting of UISingleRow.</returns>
+        public UIPanel CreateUISingleRowTestPanel()
+        {
+            UIPanel panel = new UIPanel();
+            panel.Width.Set(600f, 0f);
+            panel.Height.Set(100f, 0f);
+
+            UIText headerText = new UIText("UISingleRow Tests");
+            headerText.HAlign = 0.5f;
+            panel.Append(headerText);
+
+            // first test validates that the elements are drawn in a neat row
+            UIText drawTestText = new UIText("Draw Test:");
+            drawTestText.Top.Set(30f, 0f);
+            panel.Append(drawTestText);
+            UISingleRow drawTestRow = new UISingleRow();
+            panel.Append(drawTestRow);
+            drawTestRow.Width.Set(512f, 0f);
+            drawTestRow.Height.Set(32f, 0f);
+            drawTestRow.Top.Set(30f, 0f);
+            drawTestRow.Left.Set(drawTestText.GetOuterDimensions().Width + 5f, 0f);
+            // fill the row
+            foreach (BuffItemUIElement element in BuffItemUIElement.CreateVanillaBuffItemIcons().Values)
+            {
+                drawTestRow.Add(element);
+            }
+
+            // next test validates the sorting of the elements
+
+
             return panel;
         }
 
