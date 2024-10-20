@@ -193,8 +193,8 @@ namespace PermanentBuffViewer
         public UIPanel CreateUISingleRowTestPanel()
         {
             UIPanel panel = new UIPanel();
-            panel.Width.Set(600f, 0f);
-            panel.Height.Set(100f, 0f);
+            panel.Width.Set(650f, 0f);
+            panel.Height.Set(150f, 0f);
 
             UIText headerText = new UIText("UISingleRow Tests");
             headerText.HAlign = 0.5f;
@@ -217,6 +217,19 @@ namespace PermanentBuffViewer
             }
 
             // next test validates the sorting of the elements
+            UIText sortTestText = new UIText("Sort Test:");
+            sortTestText.Top.Set(72f, 0f);
+            panel.Append(sortTestText);
+            UISingleRow sortTestRow = new UISingleRow();
+            panel.Append(sortTestRow);
+            sortTestRow.Width.Set(512f, 0f);
+            sortTestRow.Height.Set(32f, 0f);
+            sortTestRow.Top.Set(72f, 0f);
+            sortTestRow.Left.Set(sortTestText.GetOuterDimensions().Width + 5f, 0f);
+            foreach (BuffItemUIElement element in BuffItemUIElement.CreateVanillaBuffItemIcons().Values.Reverse())
+            {
+                sortTestRow.Add(element);
+            }
 
 
             return panel;
