@@ -132,6 +132,12 @@ namespace PermanentBuffViewer
             testUISingleRowPanel.HAlign = 0.5f;
             testUISingleRowPanel.VAlign = 0.5f;
             testPanels.Add(testUISingleRowPanel);
+
+            UIPanel testAlignPanel = CreateIconAlignTestPanel();
+            testAlignPanel.HAlign = 0.5f;
+            testAlignPanel.VAlign = 0.5f;
+            testPanels.Add(testAlignPanel);
+
         }
 
         /// <summary>
@@ -231,6 +237,101 @@ namespace PermanentBuffViewer
                 sortTestRow.Add(element);
             }
 
+
+            return panel;
+        }
+
+        /// <summary>
+        /// Create a panel for testing the alignment of the UIIcons and the UIText
+        /// </summary>
+        /// <returns>A panel to test the alignment of the UIIcons and the UIText</returns>
+        public UIPanel CreateIconAlignTestPanel()
+        {
+            UIPanel panel = new UIPanel();
+            panel.Width.Set(400f, 0f);
+            panel.Height.Set(400f, 0f);
+
+            UIText headerText = new UIText("Align Test");
+            headerText.HAlign = 0.5f;
+            panel.Append(headerText);
+
+            var topPixel = 35f;
+            var leftPixel = 120f;
+            // items will be 60f appart
+
+            var rowWidth = 80f;
+            var rowHeight = 32f;
+
+
+            // Starting with the same Top (35f)
+            UIText alignedText = new UIText("Aligned +0f:");
+            panel.Append(alignedText);
+            alignedText.Top.Set(topPixel, 0f);
+
+            UISingleRow alignedSingleRow = new UISingleRow();
+            panel.Append(alignedSingleRow);
+            alignedSingleRow.Width.Set(rowWidth, 0f);
+            alignedSingleRow.Height.Set(rowHeight, 0f);
+            alignedSingleRow.Top.Set(topPixel, 0f);
+            alignedSingleRow.Left.Set(leftPixel, 0f);
+            foreach (var heart in BuffItemUIElement.CreateMultipleElements(ItemID.LifeCrystal, 2))
+            {
+                alignedSingleRow.Add(heart);
+            }
+
+
+            // Row is too low, subtracting 5f from row top
+            topPixel += 60f;
+            UIText textMinus5 = new UIText("Text Top -5f:");
+            panel.Append(textMinus5);
+            textMinus5.Top.Set(topPixel, 0f);
+
+            UISingleRow SingleRowMinus5 = new UISingleRow();
+            panel.Append(SingleRowMinus5);
+            SingleRowMinus5.Width.Set(rowWidth, 0f);
+            SingleRowMinus5.Height.Set(rowHeight, 0f);
+            SingleRowMinus5.Top.Set(topPixel - 5f, 0f);
+            SingleRowMinus5.Left.Set(leftPixel, 0f);
+            foreach (var heart in BuffItemUIElement.CreateMultipleElements(ItemID.LifeCrystal, 2))
+            {
+                SingleRowMinus5.Add(heart);
+            }
+
+
+            // Still too low, subtracting 10f from row top
+            topPixel += 60f;
+            UIText textMinus10 = new UIText("Text Top -10f:");
+            panel.Append(textMinus10);
+            textMinus10.Top.Set(topPixel, 0f);
+
+            UISingleRow SingleRowMinus10 = new UISingleRow();
+            panel.Append(SingleRowMinus10);
+            SingleRowMinus10.Width.Set(rowWidth, 0f);
+            SingleRowMinus10.Height.Set(rowHeight, 0f);
+            SingleRowMinus10.Top.Set(topPixel - 10f, 0f);
+            SingleRowMinus10.Left.Set(leftPixel, 0f);
+            foreach (var heart in BuffItemUIElement.CreateMultipleElements(ItemID.LifeCrystal, 2))
+            {
+                SingleRowMinus10.Add(heart);
+            }
+
+            // A little too far. Subtracting 8f from row top
+            topPixel += 60f;
+            UIText textMinus8 = new UIText("Text Top -8f:");
+            panel.Append(textMinus8);
+            textMinus8.Top.Set(topPixel, 0f);
+
+            UISingleRow SingleRowMinus8 = new UISingleRow();
+            panel.Append(SingleRowMinus8);
+            SingleRowMinus8.Width.Set(rowWidth, 0f);
+            SingleRowMinus8.Height.Set(rowHeight, 0f);
+            SingleRowMinus8.Top.Set(topPixel - 8f, 0f);
+            SingleRowMinus8.Left.Set(leftPixel, 0f);
+            foreach (var heart in BuffItemUIElement.CreateMultipleElements(ItemID.LifeCrystal, 2))
+            {
+                SingleRowMinus8.Add(heart);
+            }
+            // Seems perfect
 
             return panel;
         }
