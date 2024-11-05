@@ -21,7 +21,7 @@ namespace PermanentBuffViewer
     internal class BuffViewerUIState : UIState
     {
         public static BuffViewerModSystem ModSystem { get; private set; }
-        public List<IUpdateElementsOnWorldEntry> updateOnWorldEnter;
+        public List<DiffLockedUITest> updateOnWorldEnter;
 
         public TestPanels testPanels;
 
@@ -29,7 +29,7 @@ namespace PermanentBuffViewer
         public override void OnInitialize()
         {
             ContentInstance.Register(this);
-            updateOnWorldEnter = new List<IUpdateElementsOnWorldEntry>();
+            updateOnWorldEnter = new List<DiffLockedUITest>();
             testPanels = new TestPanels();
             //CreateAllTestPanels();
             
@@ -52,7 +52,7 @@ namespace PermanentBuffViewer
         /// Registers the element so it will be evaluated when the player enters a world to determine if elements need to be removed or added to it according to the availability of items.
         /// </summary>
         /// <param name="element">The element to register.</param>
-        public void RegisterUIElementForWorldUpdate(IUpdateElementsOnWorldEntry element)
+        public void RegisterUIElementForWorldUpdate(DiffLockedUITest element)
         {
             updateOnWorldEnter.Add(element);
         }
@@ -64,12 +64,7 @@ namespace PermanentBuffViewer
         {
             foreach (var element in updateOnWorldEnter)
             {
-                /*if (element is BuffItemUIGrid)
-                {
-                    ((BuffItemUIGrid)element).UpdateGridUIElementsOnWorldEnter();
-                }*/
-                //if (element is IUpdateElementsOnWorldEntry row) row.UpdateElementsOnWorldEntry();
-                element.UpdateElementsOnWorldEntry();
+                Console.WriteLine($"Following item registered: {element}");
             }
         }
 
