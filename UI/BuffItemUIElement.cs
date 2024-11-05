@@ -324,5 +324,12 @@ namespace PermanentBuffViewer.UI
             foreach (int key in keys) result.Add(key, CreateSingleElement(key));
             return result;
         }
+
+        public override string ToString()
+        {
+            return $"Buff Element Item: {Item.Name}, Condition: {usedItem}, itemUsedText: \"{itemUsedHoverText}\", " +
+                $"itemNotUsedText: \"{itemNotUsedHoverText}\", howToObtainText: \"{howToObtainText}\", statModifiedText: \"{statModified}\"";
+        }
+
     }
 }

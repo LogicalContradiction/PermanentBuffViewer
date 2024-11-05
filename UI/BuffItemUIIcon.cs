@@ -35,5 +35,11 @@ namespace PermanentBuffViewer.UI
                 itemUsedHoverText.Format(Item.Name, statModified.Value) :
                 itemNotUsedHoverText.Format(howToObtainText.Value);
         }
+
+        public override string ToString()
+        {
+            return $"Buff Icon item: {Item.Name}, Condition: {usedItem}, itemUsedText: \"{itemUsedHoverText}\", " +
+                $"itemNotUsedText: \"{itemNotUsedHoverText}\", howToObtainText: \"{howToObtainText}\", statModifiedText: \"{statModified}\"";
+        }
     }
 }

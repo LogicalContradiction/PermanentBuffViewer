@@ -16,7 +16,7 @@ namespace PermanentBuffViewer.UI
     internal class DifficultyLockedItemUIIcon : BuffItemUIElement
     {
 
-        private Condition minDifficultyAvailable;
+        public Condition MinDifficultyAvailable { get; private set; }
         private LocalizedText itemNotAvailableInCurrentDifficulty;
         private Color transparent = new Color(r:0xFF, g:0xFF, b:0xFF, alpha:0.3f);
 
@@ -45,7 +45,7 @@ namespace PermanentBuffViewer.UI
             base(item, usedItem, itemUsedHoverTextKey, itemNotUsedHoverTextKey, 
                 howToObtainKey, statModifiedKey)
         {
-            this.minDifficultyAvailable = availableDifficulties;
+            this.MinDifficultyAvailable = availableDifficulties;
             this.itemNotAvailableInCurrentDifficulty = 
                 Language.GetOrRegister(itemNotAvailableInCurrentDifficulty);
             this.hoverTextError = Language.GetOrRegister("Mods.PermanentBuffViewer.UI.ItemIcon.HoverText.Error");
@@ -53,7 +53,7 @@ namespace PermanentBuffViewer.UI
 
         public override bool ShouldBeAddedToRendering()
         {
-            return usedItem.IsMet() || minDifficultyAvailable.IsMet();
+            return usedItem.IsMet() || MinDifficultyAvailable.IsMet();
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace PermanentBuffViewer.UI
         /// <returns>Color.White if item's been used, Color.Black if it hasn't, transparent white if the item's been used but not available in the world difficulty.</returns>
         internal override Color GetDrawColor()
         {
-            if (!minDifficultyAvailable.IsMet())
+            if (!MinDifficultyAvailable.IsMet())
             {
                 if (!usedItem.IsMet())
                 {
@@ -88,7 +88,7 @@ namespace PermanentBuffViewer.UI
 
         public override string CreateHoverText()
         {
-            if (!minDifficultyAvailable.IsMet())
+            if (!MinDifficultyAvailable.IsMet())
             {
                 if (!usedItem.IsMet())
                 {
@@ -110,6 +110,13 @@ namespace PermanentBuffViewer.UI
             if (usedItem.IsMet()) return itemUsedHoverText.Format(Item.Name, statModified.Value);
             // Item wasn't used but is available.
             return itemNotUsedHoverText.Format(howToObtainText.Value);
+        }
+
+        public override string ToString()
+        {
+            return $"Diff Locked Icon Item: {Item.Name}, Condition: {usedItem}, MinDifficultyAvailable, {MinDifficultyAvailable}, " +
+                $"itemUsedText: \"{itemUsedHoverText}\", itemNotUsedText: \"{itemNotUsedHoverText}\", howToObtainText: \"{howToObtainText}\", " +
+                $"statModifiedText: \"{statModified}\", itemNotAvailableText: \"{itemNotAvailableInCurrentDifficulty}\"";
         }
     }
 }

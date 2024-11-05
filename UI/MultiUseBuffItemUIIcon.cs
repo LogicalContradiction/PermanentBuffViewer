@@ -40,5 +40,10 @@ namespace PermanentBuffViewer.UI
                 maxNumCanUse, statModified.Value) : 
                 itemNotUsedHoverText.Format(howToObtainText.Value);
         }
+
+        public override string ToString()
+        {
+            return $"Multi Use Icon Item: {Item.Name}, Condition: {usedItem}, maxNumUse: {maxNumCanUse}, itemUsedText: \"{itemUsedHoverText}\", itemNotUsedText: \"{itemNotUsedHoverText}\", howToObtainText: \"{howToObtainText}\", statModifiedText: \"{statModified}\"";
+        }
     }
 }
