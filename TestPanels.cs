@@ -175,8 +175,7 @@ namespace PermanentBuffViewer
                     continue;
                 }
                 // if it's difficulty locked, register it so it'll be added/removed
-                DifficultyLockedItemUIIcon diffIcon = element as DifficultyLockedItemUIIcon;
-                if (diffIcon != null) buffViewerUIState.RegisterUIElementForWorldUpdate(new DiffLockedUITest(diffIcon.MinDifficultyAvailable, diffIcon));
+                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element);
 
                 if (columnCount == 0) element.Left = StyleDimension.FromPixels(0);
                 else element.Left = StyleDimension.FromPixels(prevElement.Left.Pixels + 40);
@@ -239,8 +238,7 @@ namespace PermanentBuffViewer
             foreach (BuffItemUIElement element in BuffItemUIElement.CreateVanillaBuffItemIcons().Values.Reverse())
             {
                 sortTestRow.Add(element);
-                DifficultyLockedItemUIIcon diffIcon = element as DifficultyLockedItemUIIcon;
-                if (diffIcon != null) buffViewerUIState.RegisterUIElementForWorldUpdate(new DiffLockedUITest(diffIcon.MinDifficultyAvailable, diffIcon));
+                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element);
             }
 
 

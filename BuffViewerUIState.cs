@@ -49,12 +49,13 @@ namespace PermanentBuffViewer
         }
 
         /// <summary>
-        /// Registers the element so it will be evaluated when the player enters a world to determine if elements need to be removed or added to it according to the availability of items.
+        /// Checks the UI element to see if it's a Difficulty Locked one and if so, register it to be added/removed on world entry.
         /// </summary>
-        /// <param name="element">The element to register.</param>
-        public void RegisterUIElementForWorldUpdate(DiffLockedUITest element)
+        /// <param name="element">The UI element to be checked and potentially added.</param>
+        public void TryRegisterUIElementForWorldUpdate(BuffItemUIElement element)
         {
-            updateOnWorldEnter.Add(element);
+            DifficultyLockedItemUIIcon icon = element as DifficultyLockedItemUIIcon;
+            if (icon != null) updateOnWorldEnter.Add(new DiffLockedUITest (icon.MinDifficultyAvailable, icon));
         }
 
         /// <summary>
