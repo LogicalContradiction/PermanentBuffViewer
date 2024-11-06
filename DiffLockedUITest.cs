@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.UI;
 
 namespace PermanentBuffViewer
 {
@@ -15,13 +16,15 @@ namespace PermanentBuffViewer
     internal class DiffLockedUITest
     {
 
-        Condition condition;
-        DifficultyLockedItemUIIcon uiElement;
+        internal Condition condition;
+        internal DifficultyLockedItemUIIcon UIElement { get; }
+        internal UIElement Parent { get; }
 
-        public DiffLockedUITest(Condition condition, DifficultyLockedItemUIIcon element)
+        public DiffLockedUITest(Condition condition, DifficultyLockedItemUIIcon element, UIElement parent)
         {
             this.condition = condition;
-            this.uiElement = element;
+            this.UIElement = element;
+            this.Parent = parent;
         }
 
         public bool ShouldBeAddedToUI()
@@ -32,7 +35,7 @@ namespace PermanentBuffViewer
 
         public override string ToString()
         {
-            return $"Diff Locked Test Condition: {condition}, element: {uiElement}";
+            return $"Diff Locked Test Condition: {condition}, element: {UIElement}, parent: {Parent}";
         }
 
 

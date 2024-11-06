@@ -34,10 +34,5 @@ namespace PermanentBuffViewer
             }
         }
 
-
-        public override void OnEnterWorld()
-        {
-            ModContent.GetInstance<BuffViewerUIState>().UpdateUIElementsOnWorldEnter();
-        }
     }
 }

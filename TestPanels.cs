@@ -175,7 +175,7 @@ namespace PermanentBuffViewer
                     continue;
                 }
                 // if it's difficulty locked, register it so it'll be added/removed
-                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element);
+                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element, panel);
 
                 if (columnCount == 0) element.Left = StyleDimension.FromPixels(0);
                 else element.Left = StyleDimension.FromPixels(prevElement.Left.Pixels + 40);
@@ -223,6 +223,7 @@ namespace PermanentBuffViewer
             foreach (BuffItemUIElement element in BuffItemUIElement.CreateVanillaBuffItemIcons().Values)
             {
                 drawTestRow.Add(element);
+                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element, drawTestRow);
             }
 
             // next test validates the sorting of the elements
@@ -238,7 +239,7 @@ namespace PermanentBuffViewer
             foreach (BuffItemUIElement element in BuffItemUIElement.CreateVanillaBuffItemIcons().Values.Reverse())
             {
                 sortTestRow.Add(element);
-                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element);
+                buffViewerUIState.TryRegisterUIElementForWorldUpdate(element, sortTestRow);
             }
 
 

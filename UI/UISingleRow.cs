@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using Terraria.GameContent.UI.Elements;
+using Terraria.ModLoader.UI;
 using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
@@ -67,6 +70,12 @@ namespace PermanentBuffViewer.UI
             var left = 0f;
             foreach (var item in items)
             {
+                DifficultyLockedItemUIIcon diffItem = item as DifficultyLockedItemUIIcon;
+                if (diffItem != null) // This is a diff locked item, so determine if it goes in the rendering
+                {
+                    this.AddOrRemoveChild(item, diffItem.ShouldBeAddedToRendering());
+                    if (!diffItem.ShouldBeAddedToRendering()) continue;
+                }
                 item.Left.Set(left, 0f);
                 CalculatedStyle outerDimensions = item.GetOuterDimensions();
                 left += outerDimensions.Width;
