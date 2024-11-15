@@ -16,7 +16,7 @@ using Terraria.UI;
 
 namespace PermanentBuffViewer
 {
-    internal class TestPanels
+    internal class TestPanels : UIElement
     {
         internal List<UIPanel> testPanels = new List<UIPanel>();
         internal UIImageButton backButton;
@@ -29,6 +29,12 @@ namespace PermanentBuffViewer
 
         public TestPanels()
         {
+            // Set dimensions
+            Width.Set(0f, 100f);
+            Height.Set(0f, 100f);
+            HAlign = 0.5f;
+            VAlign = 0.5f;
+            
             buffViewerUIState = ModContent.GetInstance<BuffViewerUIState>();
 
             nextButton = new UIImageButton(
@@ -53,6 +59,11 @@ namespace PermanentBuffViewer
             // These starting positions are for a panel of size (300f, 300f)
             nextButton.Left.Set(1042.7273f, 0f);
             backButton.Left.Set(680.72723f, 0f);
+
+            // Append everything to it
+            Append(testPanels[CurrTestPanelIndex]);
+            Append(nextButton);
+            Append(backButton);
         }
 
         /// <summary>
@@ -90,8 +101,15 @@ namespace PermanentBuffViewer
         /// <param name="listeningElement">The listening element</param>
         internal void DecrementCount(UIMouseEvent evt, UIElement listeningElement)
         {
+            // Remove old element
+            RemoveChild(testPanels[CurrTestPanelIndex]);
+
             if (CurrTestPanelIndex - 1 < 0) CurrTestPanelIndex = testPanels.Count - 1;
             else CurrTestPanelIndex--;
+
+            // Add new element
+            Append(testPanels[CurrTestPanelIndex]);
+            AdjustButtonLocations();
         }
 
         /// <summary>
@@ -101,8 +119,15 @@ namespace PermanentBuffViewer
         /// <param name="listeningElement">The listenenr</param>
         internal void IncrementCount(UIMouseEvent evt, UIElement listeningElement)
         {
+            // Remove old element
+            RemoveChild(testPanels[CurrTestPanelIndex]);
+
             CurrTestPanelIndex++;
             CurrTestPanelIndex %= testPanels.Count;
+
+            // Add new element
+            Append(testPanels[CurrTestPanelIndex]);
+            AdjustButtonLocations();
         }
 
         /// <summary>

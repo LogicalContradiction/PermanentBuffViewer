@@ -31,20 +31,11 @@ namespace PermanentBuffViewer
             ContentInstance.Register(this);
             updateOnWorldEnter = new List<DiffLockedUITest>();
             testPanels = new TestPanels();
-            //CreateAllTestPanels();
-            
+            Append(testPanels);
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var panel in testPanels.GetElementsToAdd()) this.AddOrRemoveChild(panel, Main.playerInventory);
-            // Remove the old panel if there was one.
-            UIPanel oldPanel = testPanels.GetPrevPanel();
-            if (oldPanel != null)
-            {
-                this.RemoveChild(oldPanel);
-                testPanels.AdjustButtonLocations();
-            }
             base.Update(gameTime);
         }
 

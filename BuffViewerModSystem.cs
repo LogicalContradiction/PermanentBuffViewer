@@ -27,6 +27,17 @@ namespace PermanentBuffViewer
             userInterface.SetState(buffViewerUIState);
         }
 
+        public void ShowMyUI()
+        {
+            userInterface?.SetState(buffViewerUIState);
+        }
+
+        public void HideMyUI()
+        {
+            userInterface?.SetState(null);
+        }
+
+
         public override void UpdateUI(GameTime gameTime)
         {
             userInterface?.Update(gameTime);
@@ -41,7 +52,10 @@ namespace PermanentBuffViewer
                     "PermanentBuffViewer: Show permanent buffs",
                     delegate
                     {
-                        userInterface.Draw(Main.spriteBatch, new GameTime());
+                        if (userInterface.CurrentState != null && Main.playerInventory)
+                        {
+                            userInterface.Draw(Main.spriteBatch, new GameTime());
+                        }                       
                         return true;
                     },
                     InterfaceScaleType.UI)
