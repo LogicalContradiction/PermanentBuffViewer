@@ -65,7 +65,7 @@ namespace PermanentBuffViewer.UI
             Vector2 screenPositionForItemCenter = base.GetDimensions().Center();
             //ItemSlot.DrawItemIcon(this.item, 31, spriteBatch, screenPositionForItemCenter, this.item.scale, 32f, GetDrawColor());
             int itemID = Item.type;
-            Texture2D value = Main.Assets.Request<Texture2D>($"Images/Item_{Item.type}", AssetRequestMode.ImmediateLoad).Value;  //TextureAssets.Item[itemID].Value;
+            Texture2D value = Main.Assets.Request<Texture2D>($"Images/Item_{Item.type}").Value;
             Rectangle frame = ((Main.itemAnimations[itemID] == null) ? value.Frame() : Main.itemAnimations[itemID].GetFrame(value));
             Vector2 origin = frame.Size() / 2f;
             Vector2 screenPositionForCenter = GetDimensions().Center();
