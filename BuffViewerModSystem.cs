@@ -22,7 +22,6 @@ namespace PermanentBuffViewer
         public override void Load()
         {
             buffViewerUIState = new BuffViewerUIState();
-            buffViewerUIState.Activate();
             userInterface = new UserInterface();
             userInterface.SetState(buffViewerUIState);
         }
