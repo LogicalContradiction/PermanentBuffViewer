@@ -23,6 +23,8 @@ namespace PermanentBuffViewer
         public static BuffViewerModSystem ModSystem { get; private set; }
         public List<DiffLockedUITest> updateOnWorldEnter;
 
+        public DraggableUIButton openButton;
+
         public TestPanels testPanels;
 
 
@@ -32,6 +34,13 @@ namespace PermanentBuffViewer
             updateOnWorldEnter = new List<DiffLockedUITest>();
             testPanels = new TestPanels();
             Append(testPanels);
+
+            openButton = new DraggableUIButton(
+                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay"));
+            openButton.OnLeftClick += OpenBuffUI;
+            openButton.Top.Set(900f, 0f);
+            openButton.Left.Set(900f, 0f);
+            Append(openButton);
         }
 
         public override void Update(GameTime gameTime)
@@ -48,6 +57,12 @@ namespace PermanentBuffViewer
         {
             DifficultyLockedItemUIIcon icon = element as DifficultyLockedItemUIIcon;
             if (icon != null) updateOnWorldEnter.Add(new DiffLockedUITest (icon.MinDifficultyAvailable, icon, parent));
+        }
+
+
+        private void OpenBuffUI(UIMouseEvent evt, UIElement element)
+        {
+            Main.NewText("Open Button Pressed!");
         }
 
     }
