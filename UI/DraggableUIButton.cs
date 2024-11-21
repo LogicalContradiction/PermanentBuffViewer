@@ -24,7 +24,7 @@ namespace PermanentBuffViewer.UI
         
         public DraggableUIButton(Asset<Texture2D> texture) : base(texture)
         {      
-            
+            // get Draggable from the config file, default to false
         }
 
         public override void RightMouseDown(UIMouseEvent evt)
@@ -46,6 +46,7 @@ namespace PermanentBuffViewer.UI
         /// <param name="evt">The event fired when dragging starts.</param>
         private void DragStart(UIMouseEvent evt)
         {
+            // Use offset to remember the location on the button the user stated dragging at
             offset = new Vector2(evt.MousePosition.X - Left.Pixels, evt.MousePosition.Y - Top.Pixels);
             dragging = true;
         }
@@ -61,23 +62,31 @@ namespace PermanentBuffViewer.UI
 
             Left.Set(endMousePosition.X - offset.X, 0f);
             Top.Set(endMousePosition.Y - offset.Y, 0f);
-
-            //Recalculate();
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);  
+            base.Update(gameTime);
+
+            // Disables mouseclicks on this button from activating the player's items
+            if (ContainsPoint(Main.MouseScreen))
+            {
+                Main.LocalPlayer.mouseInterface = true;
+            }
 
             if (dragging)
             {
+                // Move the button to where the mouse is, offset included
+                // Makes the button stay in the same place relative to the mouse
                 Left.Set(Main.mouseX - offset.X, 0f); 
                 Top.Set(Main.mouseY - offset.Y, 0f);
             }
 
+            // Makes sure the button stays completely inside the parent element
             var parentSpace = Parent.GetDimensions().ToRectangle();
-            if (!GetDimensions().ToRectangle().Intersects(parentSpace))
+            if (!GetDimensions().ToRectangle().Contains(parentSpace))
             {
+                // Math to prevent the button from leaving the parent
                 Left.Pixels = Utils.Clamp(Left.Pixels, 0, parentSpace.Right - Width.Pixels);
                 Top.Pixels = Utils.Clamp(Top.Pixels, 0, parentSpace.Bottom - Height.Pixels);
             }

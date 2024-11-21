@@ -27,19 +27,34 @@ namespace PermanentBuffViewer
 
         public TestPanels testPanels;
 
+        private bool showPanels = false;
+
 
         public override void OnInitialize()
         {
             ContentInstance.Register(this);
             updateOnWorldEnter = new List<DiffLockedUITest>();
             testPanels = new TestPanels();
-            Append(testPanels);
+            //Append(testPanels);
 
             openButton = new DraggableUIButton(
                 Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay"));
-            openButton.OnLeftClick += OpenBuffUI;
+            openButton.OnLeftClick += ButtonOnClickHandler;
             openButton.Top.Set(900f, 0f);
             openButton.Left.Set(900f, 0f);
+            Append(openButton);
+        }
+
+        /// <summary>
+        /// Handler for the open button's OnClick method
+        /// </summary>
+        /// <param name="evt">The event fired when the button is clicked.</param>
+        /// <param name="element">The UIElement that was clicked on.</param>
+        private void ButtonOnClickHandler(UIMouseEvent evt, UIElement element)
+        {
+            showPanels = !showPanels;
+            this.AddOrRemoveChild(testPanels, showPanels);
+            RemoveChild(openButton);
             Append(openButton);
         }
 
@@ -57,12 +72,6 @@ namespace PermanentBuffViewer
         {
             DifficultyLockedItemUIIcon icon = element as DifficultyLockedItemUIIcon;
             if (icon != null) updateOnWorldEnter.Add(new DiffLockedUITest (icon.MinDifficultyAvailable, icon, parent));
-        }
-
-
-        private void OpenBuffUI(UIMouseEvent evt, UIElement element)
-        {
-            Main.NewText("Open Button Pressed!");
         }
 
     }
