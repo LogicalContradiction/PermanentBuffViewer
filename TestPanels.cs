@@ -366,7 +366,7 @@ namespace PermanentBuffViewer
             return panel;
         }
 
-        
+
 
 
 

@@ -15,6 +15,7 @@ using Terraria.ModLoader.UI;
 using Microsoft.Xna.Framework.Graphics;
 using PermanentBuffViewer.UI.Interface;
 using System.Xml.Linq;
+using ReLogic.Content;
 
 namespace PermanentBuffViewer
 {
@@ -27,22 +28,55 @@ namespace PermanentBuffViewer
 
         public TestPanels testPanels;
 
+        public UIPanel buffPanel;
+
         private bool showPanels = false;
+
+        // These variables hold the alignment information
+        float leftColAlignPixels = 0f;          // The right pixel location of the left column (text labels)
+        float rightColAlignPixels = 100f;       // The left pixel location of the right column (UISingleRow)
+        float rowTopPixels = 32f;               // The pixel location of the top of the next UIText
+        float rowSpriteOffsetFromText = -8f;    // Offset from top of text to top of SingleRow (to center sprites)
+        float rowTopSpace = 40f;                // Space between the top of the text for each new row
 
 
         public override void OnInitialize()
         {
             ContentInstance.Register(this);
             updateOnWorldEnter = new List<DiffLockedUITest>();
-            testPanels = new TestPanels();
-            //Append(testPanels);
+            // For testing the drawing of everything
+            //testPanels = new TestPanels();
 
             openButton = new DraggableUIButton(
-                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay"));
+                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay",
+                mode: AssetRequestMode.ImmediateLoad));
             openButton.OnLeftClick += ButtonOnClickHandler;
             openButton.Top.Set(900f, 0f);
             openButton.Left.Set(900f, 0f);
             Append(openButton);
+
+            // Make the panel
+            buffPanel = new UIPanel();
+            buffPanel.HAlign = 0.5f;
+            buffPanel.VAlign = 0.5f;
+            buffPanel.Width.Set(300f, 0f);
+            buffPanel.Height.Set(300f, 0f);
+
+            // Panel title
+            UIText panelTitleText = new UIText("Permanent Buffs");
+            panelTitleText.Top.Set(0f, 0f);
+            panelTitleText.HAlign = 0.5f;
+            buffPanel.Append(panelTitleText);
+
+            // First row, Health-related buffs
+            UIText healthRowText = new UIText("Health:");
+            UISingleRow healthRow = new UISingleRow();
+            foreach (var healthElement in BuffItemUIElement.CreateElementsByID(
+                ItemID.LifeCrystal, ItemID.LifeFruit, ItemID.AegisCrystal)) healthRow.Add(healthElement);
+            SetupTextAndRow(row: healthRow, numSprites: 3, text: healthRowText);
+            buffPanel.Append(healthRowText);
+            buffPanel.Append(healthRow);
+
         }
 
         /// <summary>
@@ -53,9 +87,61 @@ namespace PermanentBuffViewer
         private void ButtonOnClickHandler(UIMouseEvent evt, UIElement element)
         {
             showPanels = !showPanels;
-            this.AddOrRemoveChild(testPanels, showPanels);
-            RemoveChild(openButton);
-            Append(openButton);
+            // Code for testPanels
+            if (testPanels != null)
+            {
+                this.AddOrRemoveChild(testPanels, showPanels);
+                // Hack to make sure testPanels isn't drawn over the button.
+                RemoveChild(openButton);
+                Append(openButton);
+                return;
+            }
+            this.AddOrRemoveChild(buffPanel, showPanels);
+            
+        }
+
+        private void SetupTextAndRow(UISingleRow row, int numSprites, UIText text)
+        {
+            SetupSingleRow(row, numSprites);
+            AlignSingleRow(row);
+            AlignRowText(text);
+
+            // update rowTopPixels so it's ready for the next row
+            rowTopPixels += rowTopSpace;
+        }
+
+        /// <summary>
+        /// Helper used to align the sprite row 
+        /// </summary>
+        /// <param name="row">The row that is being aligned</param>
+        private void AlignSingleRow(UISingleRow row)
+        {
+            row.Left.Set(rightColAlignPixels, 0f);
+            row.Top.Set(rowTopPixels + rowSpriteOffsetFromText, 0f);
+        }
+
+        /// <summary>
+        /// Helper used to align the text of a row
+        /// </summary>
+        /// <param name="text">The text for the row</param>
+        private void AlignRowText(UIText text)
+        {
+            text.Left.Set(leftColAlignPixels, 0f);
+            text.Top.Set(rowTopPixels, 0f);
+        }
+
+        /// <summary>
+        /// Used to set up the dimensions of the Single Row
+        /// </summary>
+        /// <param name="row">The row to set the dimensions of.</param>
+        /// <param name="numSprites">The number of sprites the row will hold.</param>
+        private void SetupSingleRow(UISingleRow row, int numSprites)
+        {
+            var rowHeight = 32f;
+            var rowWidth = 32f * numSprites;
+
+            row.Height.Set(rowHeight, 0f);
+            row.Width.Set(rowWidth, 0f);
         }
 
         public override void Update(GameTime gameTime)
