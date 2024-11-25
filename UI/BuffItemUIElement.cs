@@ -325,6 +325,13 @@ namespace PermanentBuffViewer.UI
             return result;
         }
 
+        public static IEnumerable<BuffItemUIElement> CreateElementsByID(params int[] ids)
+        {
+            var result = new List<BuffItemUIElement>();
+            foreach (int id in ids) result.Add(CreateSingleElement(id));
+            return result;
+        }
+
         public override string ToString()
         {
             return $"Buff Element Item: {Item.Name}, Condition: {usedItem}, itemUsedText: \"{itemUsedHoverText}\", " +
