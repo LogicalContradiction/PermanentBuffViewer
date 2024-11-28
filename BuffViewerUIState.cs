@@ -73,9 +73,45 @@ namespace PermanentBuffViewer
             UISingleRow healthRow = new UISingleRow();
             foreach (var healthElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.LifeCrystal, ItemID.LifeFruit, ItemID.AegisCrystal)) healthRow.Add(healthElement);
-            SetupTextAndRow(row: healthRow, numSprites: 3, text: healthRowText);
+            SetupTextAndRow(row: healthRow, text: healthRowText);
             buffPanel.Append(healthRowText);
             buffPanel.Append(healthRow);
+
+            // Second, Mana-related buffs
+            UIText manaRowText = new UIText("Mana:");
+            UISingleRow manaRow = new UISingleRow();
+            foreach (var manaElement in BuffItemUIElement.CreateElementsByID(
+                ItemID.ManaCrystal, ItemID.ArcaneCrystal)) manaRow.Add(manaElement);
+            SetupTextAndRow(row: manaRow, text: manaRowText);
+            buffPanel.Append(manaRowText);
+            buffPanel.Append(manaRow);
+
+            // Third, player stats
+            UIText statRowText = new UIText("Stats:");
+            UISingleRow statRow = new UISingleRow();
+            foreach (var statElement in BuffItemUIElement.CreateElementsByID(
+                ItemID.GummyWorm, ItemID.Ambrosia, ItemID.GalaxyPearl, ItemID.AegisFruit)) statRow.Add(statElement);
+            SetupTextAndRow(row:  statRow, text: statRowText);
+            buffPanel.Append(statRowText);
+            buffPanel.Append(statRow);
+
+            // 4th, miscellaneous buffs
+            UIText miscRowText = new UIText("Misc:");
+            UISingleRow miscRow = new UISingleRow();
+            foreach (var miscElement in BuffItemUIElement.CreateElementsByID(
+                ItemID.ArtisanLoaf, ItemID.TorchGodsFavor, ItemID.DemonHeart, ItemID.MinecartPowerup)) miscRow.Add(miscElement);
+            SetupTextAndRow(row: miscRow, text: miscRowText);
+            buffPanel.Append(miscRowText);
+            buffPanel.Append(miscRow);
+
+            // 5th, world buffs
+            UIText worldRowText = new UIText("World:");
+            UISingleRow worldRow = new UISingleRow();
+            foreach (var worldElement in BuffItemUIElement.CreateElementsByID(
+                ItemID.CombatBook, ItemID.CombatBookVolumeTwo, ItemID.PeddlersSatchel)) worldRow.Add(worldElement);
+            SetupTextAndRow(row: worldRow, text: worldRowText);
+            buffPanel.Append(worldRowText);
+            buffPanel.Append(worldRow);
 
         }
 
@@ -100,9 +136,9 @@ namespace PermanentBuffViewer
             
         }
 
-        private void SetupTextAndRow(UISingleRow row, int numSprites, UIText text)
+        private void SetupTextAndRow(UISingleRow row, UIText text)
         {
-            SetupSingleRow(row, numSprites);
+            SetupSingleRow(row);
             AlignSingleRow(row);
             AlignRowText(text);
 
@@ -135,10 +171,10 @@ namespace PermanentBuffViewer
         /// </summary>
         /// <param name="row">The row to set the dimensions of.</param>
         /// <param name="numSprites">The number of sprites the row will hold.</param>
-        private void SetupSingleRow(UISingleRow row, int numSprites)
+        private void SetupSingleRow(UISingleRow row)
         {
             var rowHeight = 32f;
-            var rowWidth = 32f * numSprites;
+            var rowWidth = 32f * row.Count;
 
             row.Height.Set(rowHeight, 0f);
             row.Width.Set(rowWidth, 0f);
