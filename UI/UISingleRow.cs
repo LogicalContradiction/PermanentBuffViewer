@@ -15,7 +15,7 @@ namespace PermanentBuffViewer.UI
 
         public List<BuffItemUIElement> items = new List<BuffItemUIElement>();
 
-
+        public int Count => items.Count;
 
         public UISingleRow() 
         {
