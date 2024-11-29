@@ -17,6 +17,8 @@ namespace PermanentBuffViewer.UI
 
         public int Count => items.Count;
 
+        public float InternalSpacer { get; set; } = 5f;
+
         public UISingleRow() 
         {
 
@@ -78,7 +80,7 @@ namespace PermanentBuffViewer.UI
                 }
                 item.Left.Set(left, 0f);
                 CalculatedStyle outerDimensions = item.GetOuterDimensions();
-                left += outerDimensions.Width;
+                left += outerDimensions.Width + InternalSpacer;
             }
         }
 
