@@ -39,10 +39,13 @@ namespace PermanentBuffViewer
         float rowSpriteOffsetFromText = -8f;    // Offset from top of text to top of SingleRow (to center sprites)
         float rowTopSpace = 40f;                // Space between the top of the text for each new row
 
-
+        float buffPanelWidth = 300f;
+        float buffPanelHeight = 300f;
+      
+        
         public override void OnInitialize()
         {
-            ContentInstance.Register(this);
+            //ContentInstance.Register(this);
             updateOnWorldEnter = new List<DiffLockedUITest>();
             // For testing the drawing of everything
             //testPanels = new TestPanels();
@@ -59,8 +62,8 @@ namespace PermanentBuffViewer
             buffPanel = new UIPanel();
             buffPanel.HAlign = 0.5f;
             buffPanel.VAlign = 0.5f;
-            buffPanel.Width.Set(300f, 0f);
-            buffPanel.Height.Set(300f, 0f);
+            buffPanel.Width.Set(buffPanelWidth, 0f);
+            buffPanel.Height.Set(buffPanelHeight, 0f);
 
             // Panel title
             UIText panelTitleText = new UIText("Permanent Buffs");
