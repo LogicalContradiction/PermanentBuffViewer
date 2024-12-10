@@ -16,6 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 using PermanentBuffViewer.UI.Interface;
 using System.Xml.Linq;
 using ReLogic.Content;
+using Terraria.Localization;
 
 namespace PermanentBuffViewer
 {
@@ -66,13 +67,13 @@ namespace PermanentBuffViewer
             buffPanel.Height.Set(buffPanelHeight, 0f);
 
             // Panel title
-            UIText panelTitleText = new UIText("Permanent Buffs");
+            UIText panelTitleText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.PanelTitleText"));  // "Permanent Buffs"
             panelTitleText.Top.Set(0f, 0f);
             panelTitleText.HAlign = 0.5f;
             buffPanel.Append(panelTitleText);
 
             // First row, Health-related buffs
-            UIText healthRowText = new UIText("Health:");
+            UIText healthRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.HealthRowText"));    // "Health:"
             UISingleRow healthRow = new UISingleRow();
             foreach (var healthElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.LifeCrystal, ItemID.LifeFruit, ItemID.AegisCrystal)) healthRow.Add(healthElement);
@@ -81,7 +82,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(healthRow);
 
             // Second, Mana-related buffs
-            UIText manaRowText = new UIText("Mana:");
+            UIText manaRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.ManaRowText"));  // "Mana:"
             UISingleRow manaRow = new UISingleRow();
             foreach (var manaElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.ManaCrystal, ItemID.ArcaneCrystal)) manaRow.Add(manaElement);
@@ -90,7 +91,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(manaRow);
 
             // Third, player stats
-            UIText statRowText = new UIText("Stats:");
+            UIText statRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.StatRowText"));  // "Stats:"
             UISingleRow statRow = new UISingleRow();
             foreach (var statElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.GummyWorm, ItemID.Ambrosia, ItemID.GalaxyPearl, ItemID.AegisFruit)) statRow.Add(statElement);
@@ -99,7 +100,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(statRow);
 
             // 4th, miscellaneous buffs
-            UIText miscRowText = new UIText("Misc:");
+            UIText miscRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.MiscRowText"));  // "Misc:"
             UISingleRow miscRow = new UISingleRow();
             foreach (var miscElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.ArtisanLoaf, ItemID.TorchGodsFavor, ItemID.DemonHeart, ItemID.MinecartPowerup)) miscRow.Add(miscElement);
@@ -108,7 +109,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(miscRow);
 
             // 5th, world buffs
-            UIText worldRowText = new UIText("World:");
+            UIText worldRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.WorldRowText")); // "World:"
             UISingleRow worldRow = new UISingleRow();
             foreach (var worldElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.CombatBook, ItemID.CombatBookVolumeTwo, ItemID.PeddlersSatchel)) worldRow.Add(worldElement);

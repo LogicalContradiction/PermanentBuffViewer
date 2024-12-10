@@ -89,4 +89,13 @@ UI: {
 			Error: This item should not have been drawn. Please see the log file for more info.
 		}
 	}
+
+	Labels: {
+		PanelTitleText: Permanent Buffs
+		HealthRowText: Health:
+		ManaRowText: Mana:
+		StatRowText: Stats:
+		MiscRowText: Misc:
+		WorldRowText: World:
+	}
 }
