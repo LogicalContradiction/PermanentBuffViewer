@@ -34,14 +34,17 @@ namespace PermanentBuffViewer
         private bool showPanels = false;
 
         // These variables hold the alignment information
-        float leftColAlignPixels = 0f;          // The right pixel location of the left column (text labels)
-        float rightColAlignPixels = 100f;       // The left pixel location of the right column (UISingleRow)
-        float rowTopPixels = 32f;               // The pixel location of the top of the next UIText
-        float rowSpriteOffsetFromText = -8f;    // Offset from top of text to top of SingleRow (to center sprites)
+        float leftColAlignPixels = 10f;          // The left pixel of the left column (text labels)                      0 -> 10
+        float rightColAlignPixels = 70f;       // The left pixel location of the right column (UISingleRow)             100 -> 80 -> 70
+        float rowTopPixels = 40f;               // The pixel location of the top of the next UIText                    32 -> 40 -> 48 
+        float rowSpriteOffsetFromText = 10f;    // Offset from top of text to top of SingleRow (to center sprites) (bigger number moves the text lower in relation to the sprites)  -8 -> -12 -> -10
         float rowTopSpace = 40f;                // Space between the top of the text for each new row
 
-        float buffPanelWidth = 300f;
-        float buffPanelHeight = 300f;
+        float buffPanelWidth = 250f;           // The width of the panel                                            //  300 -> 280 -> 270 -> 260 -> 260 -> 250
+        float buffPanelHeight = 255f;          // The height of the panel                                           //  300 -> 280 -> 260 -> 270 -> 265 -> 245 -> 255
+
+        float headerTextScale = 1.1f;           // The textScale to make the main header text larger
+        float rowTextScale = 0.8f;              // The textScale to make the row label text smaller
       
         
         public override void OnInitialize()
@@ -52,11 +55,20 @@ namespace PermanentBuffViewer
             //testPanels = new TestPanels();
 
             openButton = new DraggableUIButton(
-                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay",
-                mode: AssetRequestMode.ImmediateLoad));
+                showingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_showing_v2.0[27x25]",
+                    mode: AssetRequestMode.ImmediateLoad),
+                hidingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hidden_v2.0[27x25]",
+                    mode: AssetRequestMode.ImmediateLoad),
+                showingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.ShowingContent",
+                hidingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.HidingContent");
+            /*openButton = new DraggableUIButton(
+                Main.Assets.Request<Texture2D>("Images/Item_29",
+                mode: AssetRequestMode.ImmediateLoad));*/
             openButton.OnLeftClick += ButtonOnClickHandler;
-            openButton.Top.Set(900f, 0f);
-            openButton.Left.Set(900f, 0f);
+            var openButtonPos = ModContent.GetInstance<BuffViewerConfig>().openButtonPos;
+            openButton.Top.Set(openButtonPos.Y, 0f);
+            openButton.Left.Set(openButtonPos.X, 0f);
+            Console.WriteLine($"screenHeight: {Main.screenHeight}\nscreenWidth: {Main.screenWidth}");
             Append(openButton);
 
             // Make the panel
@@ -67,13 +79,13 @@ namespace PermanentBuffViewer
             buffPanel.Height.Set(buffPanelHeight, 0f);
 
             // Panel title
-            UIText panelTitleText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.PanelTitleText"));  // "Permanent Buffs"
+            UIText panelTitleText = new UIText(text: Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.PanelTitleText"));  // "Permanent Buffs"
             panelTitleText.Top.Set(0f, 0f);
             panelTitleText.HAlign = 0.5f;
             buffPanel.Append(panelTitleText);
 
             // First row, Health-related buffs
-            UIText healthRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.HealthRowText"));    // "Health:"
+            UIText healthRowText = new UIText(text: Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.HealthRowText"), textScale: rowTextScale);    // "Health:"
             UISingleRow healthRow = new UISingleRow();
             foreach (var healthElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.LifeCrystal, ItemID.LifeFruit, ItemID.AegisCrystal)) healthRow.Add(healthElement);
@@ -82,7 +94,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(healthRow);
 
             // Second, Mana-related buffs
-            UIText manaRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.ManaRowText"));  // "Mana:"
+            UIText manaRowText = new UIText(text: Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.ManaRowText"), textScale: rowTextScale);  // "Mana:"
             UISingleRow manaRow = new UISingleRow();
             foreach (var manaElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.ManaCrystal, ItemID.ArcaneCrystal)) manaRow.Add(manaElement);
@@ -91,7 +103,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(manaRow);
 
             // Third, player stats
-            UIText statRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.StatRowText"));  // "Stats:"
+            UIText statRowText = new UIText(text: Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.StatRowText"), textScale: rowTextScale);  // "Stats:"
             UISingleRow statRow = new UISingleRow();
             foreach (var statElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.GummyWorm, ItemID.Ambrosia, ItemID.GalaxyPearl, ItemID.AegisFruit)) statRow.Add(statElement);
@@ -100,7 +112,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(statRow);
 
             // 4th, miscellaneous buffs
-            UIText miscRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.MiscRowText"));  // "Misc:"
+            UIText miscRowText = new UIText(text: Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.MiscRowText"), textScale: rowTextScale);  // "Misc:"
             UISingleRow miscRow = new UISingleRow();
             foreach (var miscElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.ArtisanLoaf, ItemID.TorchGodsFavor, ItemID.DemonHeart, ItemID.MinecartPowerup)) miscRow.Add(miscElement);
@@ -109,7 +121,7 @@ namespace PermanentBuffViewer
             buffPanel.Append(miscRow);
 
             // 5th, world buffs
-            UIText worldRowText = new UIText(Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.WorldRowText")); // "World:"
+            UIText worldRowText = new UIText(text: Language.GetOrRegister("Mods.PermanentBuffViewer.UI.Labels.WorldRowText"), textScale: rowTextScale); // "World:"
             UISingleRow worldRow = new UISingleRow();
             foreach (var worldElement in BuffItemUIElement.CreateElementsByID(
                 ItemID.CombatBook, ItemID.CombatBookVolumeTwo, ItemID.PeddlersSatchel)) worldRow.Add(worldElement);
@@ -136,7 +148,12 @@ namespace PermanentBuffViewer
                 Append(openButton);
                 return;
             }
+            openButton.SwapTexture();
             this.AddOrRemoveChild(buffPanel, showPanels);
+
+            // Hack to make sure openButton is drawn on top of panel
+            this.RemoveChild(openButton);
+            this.Append(openButton);
             
         }
 
@@ -157,7 +174,7 @@ namespace PermanentBuffViewer
         private void AlignSingleRow(UISingleRow row)
         {
             row.Left.Set(rightColAlignPixels, 0f);
-            row.Top.Set(rowTopPixels + rowSpriteOffsetFromText, 0f);
+            row.Top.Set(rowTopPixels - rowSpriteOffsetFromText, 0f);
         }
 
         /// <summary>
@@ -174,11 +191,10 @@ namespace PermanentBuffViewer
         /// Used to set up the dimensions of the Single Row
         /// </summary>
         /// <param name="row">The row to set the dimensions of.</param>
-        /// <param name="numSprites">The number of sprites the row will hold.</param>
         private void SetupSingleRow(UISingleRow row)
         {
             var rowHeight = 32f;
-            var rowWidth = 32f * row.Count;
+            var rowWidth = (32f * row.Count) + ((row.Count-1) * 5f);    // total size of sprites + total size of spacers
 
             row.Height.Set(rowHeight, 0f);
             row.Width.Set(rowWidth, 0f);

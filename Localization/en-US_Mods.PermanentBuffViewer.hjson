@@ -98,4 +98,34 @@ UI: {
 		MiscRowText: Misc:
 		WorldRowText: World:
 	}
+
+	ButtonText: {
+		HoverText: {
+			ShowingContent: Hide Permanent Buffs
+			HidingContent: Show Permanent Buffs
+		}
+	}
+}
+
+Keybinds.PrintOpenButtonCoords.DisplayName: Print Open Button Coords
+
+Configs: {
+	BuffViewerConfig: {
+		DisplayName: Buff Viewer Config
+
+		a: {
+			Label: a
+			Tooltip: ""
+		}
+
+		openButtonX: {
+			Label: open Button X
+			Tooltip: ""
+		}
+
+		openButtonPos: {
+			Label: open Button Pos
+			Tooltip: ""
+		}
+	}
 }

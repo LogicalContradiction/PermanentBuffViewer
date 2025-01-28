@@ -18,7 +18,7 @@ namespace PermanentBuffViewer
     {
         internal BuffViewerUIState buffViewerUIState;
         private UserInterface userInterface;
-        
+
         public override void Load()
         {
             buffViewerUIState = new BuffViewerUIState();

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
@@ -21,10 +22,33 @@ namespace PermanentBuffViewer.UI
         private bool dragging = false;
         // Used to indicate the button can be dragged
         private bool Draggable {  get; set; }
-        
-        public DraggableUIButton(Asset<Texture2D> texture) : base(texture)
+
+        // Use to determine if the texture drawn should be show or hide
+        private bool showContent = false;
+
+        // Texture used when the content is showing
+        private Asset<Texture2D> showingContentTexture;
+        // Texture used when the content is hidden
+        private Asset<Texture2D> hidingContentTexture;
+
+        private LocalizedText showingContentText;
+        private LocalizedText hidingContentText;
+
+        /// <summary>
+        /// Constructor for the Draggable button
+        /// </summary>
+        /// <param name="showingContentTexture">The texture of the button when the content is showing.</param>
+        /// <param name="hidingContentTexture">The texture of the button when the content is hidden.</param>
+        /// <param name="showingContentTextKey">The localization key for text when content is showing.</param>
+        /// <param name="hidingContentTextKey">The localization key for text when content is hiding.</param>
+        public DraggableUIButton(Asset<Texture2D> showingContentTexture, Asset<Texture2D> hidingContentTexture,
+            string showingContentTextKey, string hidingContentTextKey) : base(hidingContentTexture)
         {      
             // get Draggable from the config file, default to false
+            this.showingContentTexture = showingContentTexture;
+            this.hidingContentTexture = hidingContentTexture;
+            this.showingContentText = Language.GetOrRegister(showingContentTextKey);
+            this.hidingContentText = Language.GetOrRegister(hidingContentTextKey);
         }
 
         public override void RightMouseDown(UIMouseEvent evt)
@@ -90,6 +114,19 @@ namespace PermanentBuffViewer.UI
                 Left.Pixels = Utils.Clamp(Left.Pixels, 0, parentSpace.Right - Width.Pixels);
                 Top.Pixels = Utils.Clamp(Top.Pixels, 0, parentSpace.Bottom - Height.Pixels);
             }
+            // Creates hovertext
+            if (this.IsMouseHovering)
+            {
+                if (showContent) Main.instance.MouseText(showingContentText.Value);
+                else Main.instance.MouseText(hidingContentText.Value);
+            }
+        }
+
+        public void SwapTexture()
+        {
+            showContent = !showContent;
+            if (showContent) base.SetImage(showingContentTexture);
+            else base.SetImage(hidingContentTexture);
         }
 
 
