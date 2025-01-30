@@ -25,7 +25,7 @@ namespace PermanentBuffViewer
         public static BuffViewerModSystem ModSystem { get; private set; }
         public List<DiffLockedUITest> updateOnWorldEnter;
 
-        public DraggableUIButton openButton;
+        public OpenViewerButton openButton;
 
         public TestPanels testPanels;
 
@@ -54,7 +54,7 @@ namespace PermanentBuffViewer
             // For testing the drawing of everything
             //testPanels = new TestPanels();
 
-            openButton = new DraggableUIButton(
+            openButton = new OpenViewerButton(
                 showingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_showing_v2.0[27x25]",
                     mode: AssetRequestMode.ImmediateLoad),
                 hidingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hidden_v2.0[27x25]",

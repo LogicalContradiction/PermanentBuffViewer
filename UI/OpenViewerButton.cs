@@ -14,7 +14,7 @@ using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
 {
-    internal class DraggableUIButton : UIImageButton
+    internal class OpenViewerButton : UIImageButton
     {
         // Used to remember the position of the panel relative to the mouse position
         private Vector2 offset;
@@ -41,7 +41,7 @@ namespace PermanentBuffViewer.UI
         /// <param name="hidingContentTexture">The texture of the button when the content is hidden.</param>
         /// <param name="showingContentTextKey">The localization key for text when content is showing.</param>
         /// <param name="hidingContentTextKey">The localization key for text when content is hiding.</param>
-        public DraggableUIButton(Asset<Texture2D> showingContentTexture, Asset<Texture2D> hidingContentTexture,
+        public OpenViewerButton(Asset<Texture2D> showingContentTexture, Asset<Texture2D> hidingContentTexture,
             string showingContentTextKey, string hidingContentTextKey) : base(hidingContentTexture)
         {      
             // get Draggable from the config file, default to false
