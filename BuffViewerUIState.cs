@@ -57,7 +57,11 @@ namespace PermanentBuffViewer
             openButton = new OpenViewerButton(
                 showingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_showing",
                     mode: AssetRequestMode.ImmediateLoad),
+                showingContentOutlineTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_showing_outline",
+                    mode: AssetRequestMode.ImmediateLoad),
                 hidingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hiding",
+                    mode: AssetRequestMode.ImmediateLoad),
+                hidingContentOutlineTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hiding_outline",
                     mode: AssetRequestMode.ImmediateLoad),
                 showingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.ShowingContent",
                 hidingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.HidingContent");

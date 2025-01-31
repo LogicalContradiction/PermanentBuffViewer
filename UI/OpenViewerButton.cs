@@ -28,25 +28,34 @@ namespace PermanentBuffViewer.UI
 
         // Texture used when the content is showing
         private Asset<Texture2D> showingContentTexture;
+        private Asset<Texture2D> showingContentOutlineTexture;
         // Texture used when the content is hidden
         private Asset<Texture2D> hidingContentTexture;
+        private Asset<Texture2D> hidingContentOutlineTexture;
 
         private LocalizedText showingContentText;
         private LocalizedText hidingContentText;
+
+        private Color? borderColor;
 
         /// <summary>
         /// Constructor for the Draggable button
         /// </summary>
         /// <param name="showingContentTexture">The texture of the button when the content is showing.</param>
+        /// <param name="showingContentOutlineTexture">The texture of the button outline when the content is showing.</param>
         /// <param name="hidingContentTexture">The texture of the button when the content is hidden.</param>
+        /// <param name="hidingContentOutlineTexture">The texture of the button outline when the content is hidden.</param>
         /// <param name="showingContentTextKey">The localization key for text when content is showing.</param>
         /// <param name="hidingContentTextKey">The localization key for text when content is hiding.</param>
-        public OpenViewerButton(Asset<Texture2D> showingContentTexture, Asset<Texture2D> hidingContentTexture,
+        public OpenViewerButton(Asset<Texture2D> showingContentTexture, Asset<Texture2D>  showingContentOutlineTexture,
+            Asset<Texture2D> hidingContentTexture, Asset<Texture2D> hidingContentOutlineTexture,
             string showingContentTextKey, string hidingContentTextKey) : base(hidingContentTexture)
         {      
             // get Draggable from the config file, default to false
             this.showingContentTexture = showingContentTexture;
+            this.showingContentOutlineTexture = showingContentOutlineTexture;
             this.hidingContentTexture = hidingContentTexture;
+            this.hidingContentOutlineTexture = hidingContentOutlineTexture;
             this.showingContentText = Language.GetOrRegister(showingContentTextKey);
             this.hidingContentText = Language.GetOrRegister(hidingContentTextKey);
         }
@@ -92,16 +101,19 @@ namespace PermanentBuffViewer.UI
         {
             base.Update(gameTime);
 
+            borderColor = null;
+
             // Disables mouseclicks on this button from activating the player's items
             if (ContainsPoint(Main.MouseScreen))
             {
                 Main.LocalPlayer.mouseInterface = true;
             }
 
+            // Moves the button as it's dragged
             if (dragging)
             {
                 // Move the button to where the mouse is, offset included
-                // Makes the button stay in the same place relative to the mouse
+                // Makes the button stay in the same place relative to the mouse (mostly)
                 Left.Set(Main.mouseX - offset.X, 0f); 
                 Top.Set(Main.mouseY - offset.Y, 0f);
             }
@@ -117,6 +129,7 @@ namespace PermanentBuffViewer.UI
             // Creates hovertext
             if (this.IsMouseHovering)
             {
+                borderColor = Color.Gold;
                 if (showContent) Main.instance.MouseText(showingContentText.Value);
                 else Main.instance.MouseText(hidingContentText.Value);
             }
@@ -127,6 +140,19 @@ namespace PermanentBuffViewer.UI
             showContent = !showContent;
             if (showContent) base.SetImage(showingContentTexture);
             else base.SetImage(hidingContentTexture);
+        }
+
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+        {
+            base.DrawSelf(spriteBatch);
+
+            Rectangle innerRectangle = this.GetInnerDimensions().ToRectangle();
+
+            if (this.IsMouseHovering)
+            {
+                if (showContent) spriteBatch.Draw(showingContentOutlineTexture.Value, innerRectangle, borderColor.Value);
+                else spriteBatch.Draw(hidingContentOutlineTexture.Value, innerRectangle, borderColor.Value);
+            }
         }
 
 
