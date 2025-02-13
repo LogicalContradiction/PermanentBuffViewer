@@ -35,22 +35,41 @@ UI: {
 				'''
 
 			HowToObtain: {
-				LifeCrystal: Try exploring the Underground and Caverns
-				LifeFruit: Try exploring the Jungle after beating (insert boss here)
-				AegisCrystal: Try throwing a Life Crystal into the Shimmer
-				ManaCrystal: Try crafting one using 3 fallen stars at a workbench
-				ArcaneCrystal: Try throwing a Mana Crystal into Shimmer
-				GummyWorm: Try throwing a Gold Worm into Shimmer
-				Ambrosia: Try throwing any type of fruit into Shimmer
-				GalaxyPearl: Try throwing a Pink Pearl into Shimmer
-				AegisFruit: Try throwing a Life Fruit into Shimmer
-				ArtisanLoaf: Try purchasing it from the Skeleton Merchant in the Cavern layer
-				TorchGodsFavor: Try placing 101 torches close together below the surface layer and survive the trial
-				DemonHeart: Try defeating the Wall of Flesh
-				MinecartUpgrade: Try crafting this after defeating all three mechanical bosses
-				CombatBook: Try fishing during a Blood Moon
-				CombatBookVolumeTwo: Try throwing a Spell Tome into Shimmer
-				PeddlersSatchel: Try throwing a Peddler's Hat into Shimmer
+				LifeCrystal: Found in the Underground and Caverns
+				LifeFruit: 
+					'''
+					Found in the Underground Jungle and below 
+					after beating at least one mechanical boss
+					'''
+				AegisCrystal: Shimmer a Life Crystal
+				ManaCrystal: Craft using 5 fallen stars at a workbench
+				ArcaneCrystal: Shimmer a Mana Crystal
+				GummyWorm: Shimmer a Gold Worm
+				Ambrosia: Shimmer any fruit
+				GalaxyPearl: Shimmer a Pink Pearl
+				AegisFruit: Shimmer a Life Fruit
+				ArtisanLoaf: 
+					'''
+					Purchase from the Skeleton Merchant in the Cavern layer 
+					during the following moon phases:
+					  Waning Crescent
+					  New Moon
+					  Waxing Crescent
+					'''
+				TorchGodsFavor: 
+					'''
+					Defeat the Torch God 
+					(place 101 torches close together below the surface layer and survive)
+					'''
+				DemonHeart: Defeat the Wall of Flesh in Expert Mode or above
+				MinecartUpgrade: 
+					'''
+					Craft after defeating all three mechanical bosses 
+					in Expert Mode or above
+					'''
+				CombatBook: Fish during a Blood Moon
+				CombatBookVolumeTwo: Shimmer a Spell Tome
+				PeddlersSatchel: Shimmer a Peddler's Hat
 			}
 
 			ModifiedStats: {
@@ -58,19 +77,28 @@ UI: {
 				LifeFruit: +5 maximum health
 				AegisCrystal: -20% time to reach maximum health regen
 				ManaCrystal: +20 maximum mana
-				ArcaneCrystal: Reduces delay before mana begins regenerating by 5% when moving and 2.5% when standing still
+				ArcaneCrystal: 
+					'''
+					Reduces delay before mana begins regenerating by 5% 
+					when moving and 2.5% when standing still
+					'''
 				GummyWorm: +3 fishing power
 				Ambrosia: +5% mining, tile, and wall placement speed
 				GalaxyPearl: +0.03 luck
 				AegisFruit: +4 defense
 				ArtisanLoaf: +4 tile range to access crafting stations
-				TorchGodsFavor: Placing normal torches and campfires will convert them to the current biome's variant
+				TorchGodsFavor: 
+					'''
+					Placing normal torches and campfires will convert them 
+					to the current biome's variant
+					'''
 				DemonHeart: +1 accessory slot
 				MinecartUpgrade:
 					'''
-					increased max speed (102 mph) and acceleration (31 mph/s)
-					increased defense while riding a minecart dependent on current minecart speed (+2 when still, +7 at top speed)
-					minecart gains a laser attack that auto-targets enemies
+					Increased max speed (102 mph) and acceleration (31 mph/s)
+					Increased defense while riding a minecart dependent on 
+					  current minecart speed (+2 when still, +7 at top speed)
+					Minecart gains a laser attack that auto-targets enemies
 					'''
 				CombatBook: Town NPCs gain +6 defense and +20% attack damage
 				PeddlersSatchel: Traveling Merchant sells +1 item
