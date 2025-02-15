@@ -36,7 +36,7 @@ UI: {
 
 			HowToObtain: {
 				LifeCrystal: Found in the Underground and Caverns
-				LifeFruit: 
+				LifeFruit:
 					'''
 					Found in the Underground Jungle and below 
 					after beating at least one mechanical boss
@@ -48,7 +48,7 @@ UI: {
 				Ambrosia: Shimmer any fruit
 				GalaxyPearl: Shimmer a Pink Pearl
 				AegisFruit: Shimmer a Life Fruit
-				ArtisanLoaf: 
+				ArtisanLoaf:
 					'''
 					Purchase from the Skeleton Merchant in the Cavern layer 
 					during the following moon phases:
@@ -56,13 +56,13 @@ UI: {
 					  New Moon
 					  Waxing Crescent
 					'''
-				TorchGodsFavor: 
+				TorchGodsFavor:
 					'''
 					Defeat the Torch God 
 					(place 101 torches close together below the surface layer and survive)
 					'''
 				DemonHeart: Defeat the Wall of Flesh in Expert Mode or above
-				MinecartUpgrade: 
+				MinecartUpgrade:
 					'''
 					Craft after defeating all three mechanical bosses 
 					in Expert Mode or above
@@ -77,7 +77,7 @@ UI: {
 				LifeFruit: +5 maximum health
 				AegisCrystal: -20% time to reach maximum health regen
 				ManaCrystal: +20 maximum mana
-				ArcaneCrystal: 
+				ArcaneCrystal:
 					'''
 					Reduces delay before mana begins regenerating by 5% 
 					when moving and 2.5% when standing still
@@ -87,7 +87,7 @@ UI: {
 				GalaxyPearl: +0.03 luck
 				AegisFruit: +4 defense
 				ArtisanLoaf: +4 tile range to access crafting stations
-				TorchGodsFavor: 
+				TorchGodsFavor:
 					'''
 					Placing normal torches and campfires will convert them 
 					to the current biome's variant
@@ -154,6 +154,11 @@ Configs: {
 		openButtonPos: {
 			Label: open Button Pos
 			Tooltip: ""
+		}
+
+		LockOpenButtonPos: {
+			Label: Lock Open Button Position
+			Tooltip: Locks the position of the open button.
 		}
 	}
 }

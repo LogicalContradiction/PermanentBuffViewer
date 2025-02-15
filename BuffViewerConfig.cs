@@ -24,14 +24,7 @@ namespace PermanentBuffViewer
         public float openButtonX { get; set; } = 1523f;
         private float openButtonY { get; set; } = 790f;
 
-
-
-        /*[OnDeserialized]
-        internal void OnDeserialized(StreamingContext context)
-        {
-            a = new Vector2(Main.screenWidth, Main.screenHeight);
-            Console.WriteLine($"OnDeserial:\n screenHeight: {Main.screenHeight}\n screenWidth: {Main.screenWidth}");
-        }*/
+        public bool LockOpenButtonPos { get; set; } = false;
 
     }
 }

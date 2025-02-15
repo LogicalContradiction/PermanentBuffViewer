@@ -10,6 +10,8 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 using Terraria.UI;
 
 namespace PermanentBuffViewer.UI
@@ -38,6 +40,8 @@ namespace PermanentBuffViewer.UI
 
         private Color? borderColor;
 
+        private BuffViewerConfig config;
+
         /// <summary>
         /// Constructor for the Draggable button
         /// </summary>
@@ -58,19 +62,20 @@ namespace PermanentBuffViewer.UI
             this.hidingContentOutlineTexture = hidingContentOutlineTexture;
             this.showingContentText = Language.GetOrRegister(showingContentTextKey);
             this.hidingContentText = Language.GetOrRegister(hidingContentTextKey);
+            this.config = ModContent.GetInstance<BuffViewerConfig>();
         }
 
         public override void RightMouseDown(UIMouseEvent evt)
         {
             base.RightMouseDown(evt);
-            DragStart(evt);
+            if (!config.LockOpenButtonPos) DragStart(evt);
         }
 
 
         public override void RightMouseUp(UIMouseEvent evt)
         {
             base.RightMouseUp(evt);
-            DragEnd(evt);
+            if (!config.LockOpenButtonPos) DragEnd(evt);
         }
 
         /// <summary>

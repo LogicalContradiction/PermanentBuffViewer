@@ -34,14 +34,14 @@ namespace PermanentBuffViewer
         private bool showPanels = false;
 
         // These variables hold the alignment information
-        float leftColAlignPixels = 10f;          // The left pixel of the left column (text labels)                      0 -> 10
-        float rightColAlignPixels = 70f;       // The left pixel location of the right column (UISingleRow)             100 -> 80 -> 70
-        float rowTopPixels = 40f;               // The pixel location of the top of the next UIText                    32 -> 40 -> 48 
-        float rowSpriteOffsetFromText = 10f;    // Offset from top of text to top of SingleRow (to center sprites) (bigger number moves the text lower in relation to the sprites)  -8 -> -12 -> -10
+        float leftColAlignPixels = 10f;          // The left pixel of the left column (text labels)
+        float rightColAlignPixels = 70f;       // The left pixel location of the right column (UISingleRow)
+        float rowTopPixels = 40f;               // The pixel location of the top of the next UIText
+        float rowSpriteOffsetFromText = 10f;    // Offset from top of text to top of SingleRow (to center sprites) (bigger number moves the text lower in relation to the sprites)
         float rowTopSpace = 40f;                // Space between the top of the text for each new row
 
-        float buffPanelWidth = 250f;           // The width of the panel                                            //  300 -> 280 -> 270 -> 260 -> 260 -> 250
-        float buffPanelHeight = 255f;          // The height of the panel                                           //  300 -> 280 -> 260 -> 270 -> 265 -> 245 -> 255
+        float buffPanelWidth = 250f;           // The width of the panel
+        float buffPanelHeight = 255f;          // The height of the panel
 
         float headerTextScale = 1.1f;           // The textScale to make the main header text larger
         float rowTextScale = 0.8f;              // The textScale to make the row label text smaller
@@ -64,7 +64,8 @@ namespace PermanentBuffViewer
                 hidingContentOutlineTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hiding_outline",
                     mode: AssetRequestMode.ImmediateLoad),
                 showingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.ShowingContent",
-                hidingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.HidingContent");
+                hidingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.HidingContent"
+                );
             /*openButton = new DraggableUIButton(
                 Main.Assets.Request<Texture2D>("Images/Item_29",
                 mode: AssetRequestMode.ImmediateLoad));*/
@@ -72,7 +73,6 @@ namespace PermanentBuffViewer
             var openButtonPos = ModContent.GetInstance<BuffViewerConfig>().openButtonPos;
             openButton.Top.Set(openButtonPos.Y, 0f);
             openButton.Left.Set(openButtonPos.X, 0f);
-            Console.WriteLine($"screenHeight: {Main.screenHeight}\nscreenWidth: {Main.screenWidth}");
             Append(openButton);
 
             // Make the panel
