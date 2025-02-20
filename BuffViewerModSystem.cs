@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,7 @@ namespace PermanentBuffViewer
         {
             buffViewerUIState = new BuffViewerUIState();
             userInterface = new UserInterface();
-            userInterface.SetState(buffViewerUIState);
+            userInterface.SetState(buffViewerUIState); 
         }
 
         public void ShowMyUI()

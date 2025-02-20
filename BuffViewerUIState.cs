@@ -45,7 +45,7 @@ namespace PermanentBuffViewer
 
         float headerTextScale = 1.1f;           // The textScale to make the main header text larger
         float rowTextScale = 0.8f;              // The textScale to make the row label text smaller
-      
+     
         
         public override void OnInitialize()
         {
@@ -55,14 +55,10 @@ namespace PermanentBuffViewer
             //testPanels = new TestPanels();
 
             openButton = new OpenViewerButton(
-                showingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_showing",
-                    mode: AssetRequestMode.ImmediateLoad),
-                showingContentOutlineTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_showing_outline",
-                    mode: AssetRequestMode.ImmediateLoad),
-                hidingContentTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hiding",
-                    mode: AssetRequestMode.ImmediateLoad),
-                hidingContentOutlineTexture: ModContent.GetInstance<PermanentBuffViewer>().Assets.Request<Texture2D>("Assets/button_content_hiding_outline",
-                    mode: AssetRequestMode.ImmediateLoad),
+                showingContentTexture: AssetsOpenButton.ShowingContent,
+                showingContentOutlineTexture: AssetsOpenButton.ShowingContentOutline,
+                hidingContentTexture: AssetsOpenButton.HidingContent,
+                hidingContentOutlineTexture: AssetsOpenButton.HidingContentOutline,
                 showingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.ShowingContent",
                 hidingContentTextKey: "Mods.PermanentBuffViewer.UI.ButtonText.HoverText.HidingContent"
                 );
