@@ -216,5 +216,12 @@ namespace PermanentBuffViewer
             if (icon != null) updateOnWorldEnter.Add(new DiffLockedUITest (icon.MinDifficultyAvailable, icon, parent));
         }
 
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+        {
+            base.DrawSelf(spriteBatch);
+            // Prevents mouse clicks from using selected item while hovering the panel
+            if (buffPanel.ContainsPoint(Main.MouseScreen) && showPanels) Main.LocalPlayer.mouseInterface = true;
+        }
+
     }
 }
